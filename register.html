@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - X DKV 3</title>
+
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <section class="auth-card">
+
+      <h1>
+        Buat akun<br>
+        website XDKV3
+      </h1>
+
+      <form class="auth-form" id="registerForm">
+
+    
+          <div class="auth-input-group">
+    <span class="auth-icon">👤</span>
+    <input
+  type="text"
+  id="registerUsername"
+  placeholder="Your Username"
+  required
+>
+  </div>
+
+<div class="auth-field">
+  <label for="registerEmail">Email</label>
+  <input
+    type="email"
+    id="registerEmail"
+    placeholder="Masukkan email"
+    autocomplete="email"
+    required
+  >
+</div>
+
+  <div class="auth-input-group">
+    <span class="auth-icon">🔒</span>
+    <input
+  type="password"
+  id="registerPassword"
+  placeholder="Your password"
+  required
+>
+  </div>
+
+  <div class="auth-input-group">
+    <span class="auth-icon">🔒</span>
+   <input
+  type="password"
+  id="registerConfirmPassword"
+  placeholder="Verify your password"
+  required
+>
+  </div>
+
+  <button type="submit" class="auth-btn">
+    Buat
+  </button>
+
+</form>
+
+    </section>
+
+  </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabaseClient.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

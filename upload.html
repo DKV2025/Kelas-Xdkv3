@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Karya - X DKV 3</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="upload-page">
+
+    <a href="index.html" class="upload-back-btn">
+  ← Kembali
+</a>
+
+    <section class="upload-container">
+
+      <div class="upload-top">
+
+        <div class="upload-field">
+          <label class="upload-label">Category</label>
+
+          <div class="custom-select">
+            <button type="button" class="select-trigger">
+              <span>Digital art</span>
+              <span>&gt;</span>
+            </button>
+
+            <div class="select-options">
+              <button type="button">Digital art</button>
+              <button type="button">Photography</button>
+              <button type="button">Editing</button>
+              <button type="button">Traditional art</button>
+              <button type="button">Design/Poster</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-field post-type-field">
+          <label class="upload-label">Post type</label>
+
+          <div class="post-type-options">
+            <button type="button" class="post-type-btn">
+              Open Commission
+            </button>
+
+            <button type="button" class="post-type-btn">
+              Showcase/Feed
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <label class="upload-box" for="artworkFile">
+
+        <input
+          type="file"
+          id="artworkFile"
+          name="artwork"
+          accept="image/*"
+          hidden
+        >
+
+        <div class="upload-corner corner-tl"></div>
+        <div class="upload-corner corner-tr"></div>
+        <div class="upload-corner corner-bl"></div>
+        <div class="upload-corner corner-br"></div>
+
+        <div class="upload-empty">
+          <p>Upload your artwork</p>
+
+          <div class="upload-icon">
+            ↑
+          </div>
+
+          <span>click/drag file</span>
+        </div>
+
+        <!-- Nanti area ini dipakai JS untuk preview gambar -->
+        <div class="upload-preview" hidden>
+          <img src="" alt="Preview karya">
+        </div>
+
+      </label>
+
+
+      <div class="description-field">
+        <label for="description">Description</label>
+
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Add description"
+        ></textarea>
+      </div>
+
+<div class="upload-field aspect-field">
+  <label class="upload-label">Image ratio</label>
+
+  <div class="aspect-options">
+    <button type="button" class="aspect-btn active" data-aspect="square">
+      1:1 Square
+    </button>
+
+    <button type="button" class="aspect-btn" data-aspect="original">
+      Original
+    </button>
+  </div>
+</div>
+
+      <article class="upload-post-preview">
+
+ <div class="preview-image-placeholder" id="postPreviewImage">
+
+  <span id="previewCategory" class="preview-category-badge">
+    Digital art
+  </span>
+
+  <span class="preview-placeholder-text" id="previewPlaceholderText">
+    Preview postingan akan muncul di sini
+  </span>
+
+<img
+  id="previewPostImg"
+  src=""
+  alt="Preview postingan"
+  hidden
+>
+
+</div>
+
+  <div class="preview-creator">
+
+   <img
+  src="images/pp-01.png"
+  alt="Profile"
+  class="preview-avatar"
+  id="previewAvatar"
+>
+
+<div class="preview-text">
+  <div class="preview-badges">
+    <span id="previewPostType" class="preview-badge">
+      Choose post type
+    </span>
+  </div>
+
+  <h4 id="previewName">Nama akun</h4>
+
+  <p id="previewDescription">
+    Deskripsi karya akan tampil di sini.
+  </p>
+
+  <span id="previewStatus">
+    Pending review
+  </span>
+</div>
+
+</article>
+
+<div class="upload-action">
+<button type="button" class="submit-review-btn" id="submitReviewBtn">
+  Submit for review
+</button>
+
+        <p>
+          Postingan akan ditinjau sebelum tampil. Biasanya membutuhkan 1–24 jam.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabaseClient.js"></script>
+<script src="upload.js"></script>
+</body>
+</html>

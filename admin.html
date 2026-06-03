@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Review - X DKV 3</title>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <main class="admin-page">
+
+  <section class="admin-layout">
+
+    <div class="review-list" id="reviewList">
+      <!-- Request card akan dimasukkan lewat JS -->
+    </div>
+
+    <aside class="admin-brand">
+      <span>X</span>
+      <span>D</span>
+      <span>K</span>
+      <span>V</span>
+      <span>3</span>
+    </aside>
+
+  </section>
+
+  <section class="approved-admin-section">
+    <h2>Approved Works</h2>
+
+    <div class="approved-admin-list" id="approvedAdminList">
+      <!-- approved posts muncul dari JS -->
+    </div>
+  </section>
+
+</main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

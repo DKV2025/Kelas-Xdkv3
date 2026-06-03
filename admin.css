@@ -1,0 +1,365 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Syne", system-ui, sans-serif;
+  background: #eef7f9;
+  color: #f4f7fb;
+}
+
+
+
+
+/* =========================
+   ADMIN PAGE
+========================= */
+
+.admin-page {
+  min-height: 100vh;
+  padding: 64px 6%;
+}
+
+.admin-layout {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 90px;
+  align-items: start;
+}
+
+
+/* =========================
+   REVIEW LIST
+========================= */
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
+
+
+/* =========================
+   REVIEW CARD
+========================= */
+
+.review-card {
+  width: 100%;
+
+  padding: 44px 50px 42px;
+
+  background: #121a26;
+  border-radius: 10px;
+
+  box-shadow: 0 18px 45px rgba(0,0,0,.12);
+}
+
+.review-content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+.review-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 2px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,.08);
+}
+
+.review-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.review-info {
+  padding-top: 74px;
+}
+
+.review-meta {
+  margin-bottom: 36px;
+
+  font-size: 1.15rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.review-description {
+  max-width: 420px;
+
+  margin-bottom: 110px;
+
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.review-actions {
+  display: flex;
+  gap: 42px;
+}
+
+.review-btn {
+  width: 150px;
+  height: 115px;
+
+  border: none;
+  border-radius: 6px;
+
+  font-size: 1.35rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    filter .2s ease;
+}
+
+.review-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.04);
+}
+
+.approve-btn {
+  background: #9de5c9;
+  color: #111827;
+}
+
+.decline-btn {
+  background: #e58b98;
+  color: #111827;
+}
+
+
+/* =========================
+   USER REQUEST TEXT
+========================= */
+
+.request-user {
+  margin-top: 28px;
+
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+
+/* =========================
+   BRAND SIDE TEXT
+========================= */
+
+.admin-brand {
+  position: sticky;
+  top: 60px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 34px;
+
+  color: #151a22;
+
+  font-size: 4.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-review {
+  padding: 80px 40px;
+
+  background: #121a26;
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.empty-review h2 {
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+}
+
+.empty-review p {
+  color: rgba(255,255,255,.65);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 960px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .admin-brand {
+    position: static;
+
+    flex-direction: row;
+    justify-content: center;
+
+    font-size: 3rem;
+    gap: 18px;
+
+    order: -1;
+  }
+
+  .review-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .review-info {
+    padding-top: 0;
+  }
+
+  .review-description {
+    margin-bottom: 42px;
+  }
+
+  .review-actions {
+    gap: 18px;
+  }
+
+  .review-btn {
+    flex: 1;
+    height: 76px;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-page {
+    padding: 36px 5%;
+  }
+
+  .review-card {
+    padding: 24px;
+  }
+
+  .request-user {
+    font-size: 1.25rem;
+  }
+
+  .review-meta,
+  .review-description {
+    font-size: 1rem;
+  }
+}
+
+
+.approved-admin-section {
+  width: min(100%, 1180px);
+  margin: 70px auto 0;
+}
+
+.approved-admin-section h2 {
+  margin-bottom: 20px;
+  color: #09071f;
+  font-size: 1.6rem;
+}
+
+.approved-admin-list {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.approved-admin-card {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+
+  padding: 16px;
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 30px rgba(2, 7, 56, 0.1);
+}
+
+.approved-admin-image {
+  width: 120px;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.approved-admin-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.approved-admin-info {
+  min-width: 0;
+}
+
+.approved-admin-info h3,
+.approved-admin-info p {
+  overflow-wrap: anywhere;
+}
+
+.feature-btn {
+  margin-top: 10px;
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #09071f;
+  color: #fff;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.feature-btn.active {
+  background: #376cff;
+}
+
+.review-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.review-content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}

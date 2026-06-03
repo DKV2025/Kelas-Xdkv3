@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - X DKV 3</title>
+
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <section class="auth-card">
+
+      <h1>
+        Selamat datang di<br>
+        website XDKV3
+      </h1>
+
+      <form class="auth-form" id="loginForm">
+
+  <div class="auth-input-group">
+    <span class="auth-icon">👤</span>
+    <input type="text" id="loginUsername" placeholder="Your Username">
+  </div>
+
+  <div class="auth-field">
+  <label for="loginEmail">Email</label>
+  <input
+    type="email"
+    id="loginEmail"
+    placeholder="Masukkan email"
+    autocomplete="email"
+    required
+  >
+</div>
+
+  <div class="auth-input-group">
+    <span class="auth-icon">🔒</span>
+    <input type="password" id="loginPassword" placeholder="Your Password">
+  </div>
+
+  <button type="submit" class="auth-btn">
+    Login
+  </button>
+
+</form>
+
+      <p class="auth-switch">
+        Belum punya akun?<br>
+        <a href="register.html">register sekarang</a>
+      </p>
+
+    </section>
+
+  </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabaseClient.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

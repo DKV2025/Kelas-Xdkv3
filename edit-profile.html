@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Edit Profile - X DKV 3</title>
+
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+  <main class="edit-page">
+
+    <a href="profile.html" class="back-link">
+      ←
+    </a>
+
+    <section class="edit-card">
+
+      <div class="edit-top">
+
+        <label for="editAvatar" class="edit-avatar-wrap">
+          <img
+            src="images/pp-01.png"
+            alt="Profile avatar"
+            class="edit-avatar"
+            id="editAvatarPreview"
+          >
+
+          <input
+            type="file"
+            id="editAvatar"
+            accept="image/*"
+            hidden
+          >
+        </label>
+
+        <div class="edit-user-preview">
+          <h1 id="editPreviewUsername">User1</h1>
+          <p id="editPreviewBio">Artist kecil :p</p>
+          <p id="editPreviewInstagram">IG : @Ahdanrizkiya</p>
+        </div>
+
+      </div>
+
+
+      <form class="edit-form" id="editProfileForm">
+
+        <p class="edit-title">Edit your profile</p>
+
+        <div class="edit-input-group">
+          <span class="edit-icon">✎</span>
+          <input
+            type="text"
+            id="editUsername"
+            placeholder="Username"
+          >
+        </div>
+
+        <div class="edit-input-group">
+          <span class="edit-icon">✎</span>
+          <input
+            type="text"
+            id="editBio"
+            placeholder="Bio"
+          >
+        </div>
+
+        <div class="edit-input-group">
+          <span class="edit-icon">✎</span>
+          <input
+            type="text"
+            id="editInstagram"
+            placeholder="@instagram"
+          >
+        </div>
+
+        <button type="submit" class="save-profile-btn">
+          Ubah
+        </button>
+
+      </form>
+
+    </section>
+
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

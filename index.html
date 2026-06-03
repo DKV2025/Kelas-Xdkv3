@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta name="description" content="Profil dan dokumentasi kelas X DKV 3 SMKN 1 Tasikmalaya. Berisi karya digital siswa, struktur kelas, dan galeri." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X DKV 3 – SMKN 1 Tasikmalaya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+  <!-- ═══════════════════════════════════════
+       1. HEADER (sticky)
+  ═══════════════════════════════════════ -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <p class="brand">X DKV 3 · SMKN 1 Tsm</p>
+
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#hero">Home</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#cara">Cara</a>
+        <a href="#struktur">Struktur</a>
+        <a href="#karya">Karya</a>
+      </nav>
+        <div class="nav-auth" id="navAuth"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════
+         2. HERO — Slideshow karya + logo bawah
+    ═══════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Hero slideshow karya">
+
+      <!-- Slideshow area -->
+      <div class="slideshow" aria-live="polite">
+        <div class="slides-track" id="slidesTrack">
+          <div class="slide"><img src="images/karya-01.jpg" alt="Karya 1" /></div>
+          <div class="slide"><img src="images/karya-02.jpg" alt="Karya 2" /></div>
+          <div class="slide"><img src="images/karya-03.jpg" alt="Karya 3" /></div>
+          <div class="slide"><img src="images/karya-04.jpg" alt="Karya 4" /></div>
+          <div class="slide"><img src="images/karya-05.jpg" alt="Karya 5" /></div>
+
+          <!-- duplikat untuk infinite loop -->
+          <div class="slide" aria-hidden="true"><img src="images/karya-01.jpg" alt="" /></div>
+          <div class="slide" aria-hidden="true"><img src="images/karya-02.jpg" alt="" /></div>
+        </div>
+
+        <!-- Tombol skip -->
+        <div class="slide-controls">
+          <button class="slide-btn" id="slidePrev" aria-label="Sebelumnya">&#8592;</button>
+          <button class="slide-btn" id="slideNext" aria-label="Berikutnya">&#8594;</button>
+        </div>
+      </div>
+
+      <!-- Logo + tagline di bawah slideshow -->
+      <div class="hero-brand-bar">
+        <div class="container hero-brand-inner">
+          <img class="hero-logo" src="images/logo-kelas.png" alt="Logo Kelas X DKV 3" />
+          <div class="hero-brand-text">
+            <h1 class="hero-title">Tempat ide<br />menjadi visual</h1>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         3. TENTANG KELAS DKV
+    ═══════════════════════════════════════ -->
+    <section class="section" id="tentang" aria-labelledby="tentang-title">
+      <div class="container">
+        <h2 id="tentang-title" class="section-title">Tentang website</h2>
+
+      <p>Web ini adalah ruang portofolio digital siswa X DKV 3 yang dikembangkan sebagai project kreatif kelas.
+    Di sini, siswa bisa menampilkan karya, membangun identitas, dan menampilkan karya siswa DKV secara lebih luas.
+  </p>
+</section>
+
+<!-- ============================================
+     KARYA SISWA
+============================================ -->
+<section class="karya-showcase" id="karya">
+  <div class="karya-header">
+    <h2>Portofolio siswa</h2>
+  </div>
+<a href="upload.html" class="upload-entry-btn">
+  Upload karya
+</a>
+  <div class="karya-scroll" id="approvedPostsContainer">
+
+    <!-- CARD 1 -->
+    <article class="karya-card">
+
+      <span class="kategori">
+        Digital Art
+      </span>
+
+      <img src="images/post-01.jpg" alt="Karya siswa">
+
+      <div class="creator">
+
+        <a href="profile.html?userId=${post.userId}" class="post-author">
+  <img src="${post.avatar || 'images/pp-01.png'}" alt="${post.username}">
+
+  <div>
+    <h3>${post.username}</h3>
+    <span>${formatDate(post.approvedAt || post.createdAt)}</span>
+  </div>
+</a>
+
+        <div class="creator-info">
+          <h4>Agdan</h4>
+          <p>
+            Kayanya kalau style seperti ini cocoknya
+            semi realism deh ya?
+          </p>
+
+          <span class="tanggal">
+            16/5/26
+          </span>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- CARD 2 -->
+    <article class="karya-card">
+
+      <span class="kategori">
+        Photography
+      </span>
+
+      <img src="images/post-02.jpg" alt="Karya siswa">
+
+      <div class="creator">
+
+        <img class="creator-pp"
+          src="images/pp-02.png"
+          alt="Profile">
+
+        <div class="creator-info">
+          <h4>Jang Ohak</h4>
+          <p>
+            Street photography sore hari.
+          </p>
+
+          <span class="tanggal">
+            16/5/26
+          </span>
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+</section>
+
+<!-- 5. Cara Kami Berkarya -->
+    <section class="section" id="cara" aria-labelledby="cara-title">
+      <div class="container">
+        <h2 id="cara-title" class="section-title">Cara kami berkarya</h2>
+
+        <ul class="clean-points">
+          <li>Standar desain yang konsisten & terbaca.</li>
+          <li>Terbuka terhadap kritik.</li>
+          <li>Menghargai peran dan ide satu sama lain.</li>
+          <li>Profesional.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         5. STRUKTUR KELAS
+    ═══════════════════════════════════════ -->
+    <section class="section" id="struktur" aria-labelledby="struktur-title">
+      <div class="container">
+        <h2 id="struktur-title" class="section-title">Struktur kelas XDKV3</h2>
+
+        <!-- Guru -->
+        <div class="struktur-top">
+          <article class="person">
+            <img src="images/anggota-01.jpg" alt="Foto wali kelas" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Wali kelas</p>
+              <h3 class="person-name">M.Iman Firmansyah S.kom</h3>
+              <p class="person-sub">Guru Produktif / Pembimbing</p>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-02.jpg" alt="Foto wali murid" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Wali murid</p>
+              <h3 class="person-name">Asep Irawan Takhyana, S.Pd</h3>
+              <p class="person-sub">Guru Bahasa Indonesia</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Pengurus -->
+        <div class="grid-seksi">
+          <article class="person">
+            <img src="images/anggota-03.jpg" alt="Foto ketua murid" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Ketua murid</p>
+              <h3 class="person-name">Elpan Setia Nugraha</h3>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-04.jpg" alt="Foto wakil ketua murid" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Wakil ketua murid</p>
+              <h3 class="person-name">Riska Rismayanti</h3>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-05.jpg" alt="Foto sekretaris" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Sekretaris</p>
+              <h3 class="person-name">Dewi Murni</h3>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-06.jpg" alt="Foto wakil sekretaris" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Wakil sekretaris</p>
+              <h3 class="person-name">Luthfi Farizqi Maulana</h3>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-07.jpg" alt="Foto bendahara" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Bendahara</p>
+              <h3 class="person-name">Hafizah Nur Hasanah</h3>
+            </div>
+          </article>
+
+          <article class="person">
+            <img src="images/anggota-08.jpg" alt="Foto wakil bendahara" loading="lazy" />
+            <div class="person-meta">
+              <p class="person-role">Wakil bendahara</p>
+              <h3 class="person-name">Sophia Nabilah Nurullillah</h3>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         6. GALERI
+    ═══════════════════════════════════════ -->
+    <section class="section" id="galeri" aria-labelledby="galeri-title">
+      <div class="container">
+        <h2 id="galeri-title" class="section-title">Galeri</h2>
+
+        <div class="galeri-swipe" aria-label="Galeri geser">
+          <div class="grid-galeri" role="list">
+            <figure class="img-tile" role="listitem"><img src="images/galeri-01.jpg" alt="Kegiatan 1" loading="lazy" /></figure>
+            <figure class="img-tile" role="listitem"><img src="images/galeri-02.jpg" alt="Kegiatan 2" loading="lazy" /></figure>
+            <figure class="img-tile" role="listitem"><img src="images/galeri-03.jpg" alt="Kegiatan 3" loading="lazy" /></figure>
+            <figure class="img-tile" role="listitem"><img src="images/galeri-04.jpg" alt="Kegiatan 4" loading="lazy" /></figure>
+            <figure class="img-tile" role="listitem"><img src="images/galeri-05.jpg" alt="Kegiatan 5" loading="lazy" /></figure>
+            <figure class="img-tile" role="listitem"><img src="images/galeri-06.jpg" alt="Kegiatan 6" loading="lazy" /></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════
+       7. FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer" id="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-social" aria-label="Sosial media">
+        <a class="ig-link" href="https://www.instagram.com/europhia.sketsaa/"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Buka Instagram @europhia.sketsaa">
+          <img class="ig-icon" src="images/instagram.png" alt="" aria-hidden="true" />
+          <span class="ig-handle">@europhia.sketsaa</span>
+        </a>
+      </div>
+
+      <p class="footer-address">
+        <span class="muted">JL.Mancogeh no26, Kec.Cipedes, Kota Tasikmalaya, Jawa Barat.</span>
+      </p>
+
+      <div class="footer-join">
+  <h3>Join Us?</h3>
+  <p>
+    Creative project portofolio digital DKV. <p>
+    <p>Open for collaboration, portfolio showcase, and creative projects.
+    Untuk kelas DKV lain yang ingin ikut menampilkan.
+  </p>
+
+  <a href="https://www.instagram.com/Ahdanrizkiya" target="_blank" class="join-link">
+    Contact @Ahdanrizkiya
+  </a>
+</div>
+
+      <div class="creator-credit">
+  <p class="credit-label">Created by</p>
+
+  <div class="credit-content">
+    <img src="images/pembuat.png" alt="Creator profile" class="credit-avatar">
+
+    <div class="credit-text">
+      <h4>Akhdan</h4>
+      <p>Creating somethings that feel alive.</p>
+    </div>
+  </div>
+</div>
+
+  <div class="login-toast" id="loginToast">
+    <div class="login-toast-content">
+      <strong>Login untuk upload</strong>
+      <p>Gunakan akun untuk upload karya.</p>
+    </div>
+
+    <div class="login-toast-actions">
+      <a href="login.html">Login</a>
+      <button type="button" id="closeLoginToast">×</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

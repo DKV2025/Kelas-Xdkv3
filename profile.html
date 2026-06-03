@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profile - X DKV 3</title>
+
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+  <main class="profile-page">
+
+    <a href="index.html" class="profile-back-btn">
+  ← Kembali
+</a>
+    <section class="profile-hero">
+
+      <div class="profile-left">
+        <img
+          src="images/pp-01.png"
+          alt="Profile avatar"
+          class="profile-avatar"
+          id="profileAvatar"
+        >
+
+        <a href="edit-profile.html" id="editProfileBtn" class="profile-action-btn">
+  Edit Profile
+</a>
+      </div>
+
+    
+
+      <div class="profile-info">
+        <h1 id="profileUsername">User1</h1>
+
+        <p id="profileBio">
+          Artist kecil :p
+        </p>
+
+        <a
+       href="#"
+       id="profileInstagram"
+       class="profile-instagram"
+       target="_blank"
+       rel="noopener noreferrer"
+>
+  Belum ada Instagram.
+</a>
+      </div>
+    </div>
+  <button class="logout-btn" id="logoutBtn">
+  Logout
+</button>
+</div>
+    </section>
+
+  
+
+
+    <section class="my-work-section">
+
+      <h2 id="worksTitle">My Works</h2>
+
+      <div class="my-work-list" id="myWorkList">
+        <!-- karya user akan muncul lewat JS -->
+      </div>
+
+    </section>
+
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>
