@@ -363,3 +363,85 @@ html,
 body {
   overflow-x: hidden;
 }
+
+
+/*tambahan fix*/
+
+/* FIX APPROVED WORKS TEXT */
+.approved-admin-card {
+  min-width: 0;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.approved-admin-info {
+  min-width: 0;
+  color: #09071f;
+}
+
+.approved-admin-info h3 {
+  margin: 0 0 6px;
+
+  color: #09071f;
+  font-size: 1rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.approved-admin-info p {
+  margin: 0 0 6px;
+
+  color: rgba(9, 7, 31, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+.approved-admin-info p:nth-of-type(2) {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+.approved-admin-image {
+  flex-shrink: 0;
+}
+
+.feature-btn {
+  width: fit-content;
+  max-width: 100%;
+
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .approved-admin-list {
+    grid-template-columns: 1fr;
+  }
+
+  .approved-admin-card {
+    grid-template-columns: 92px 1fr;
+    gap: 14px;
+
+    max-height: none;
+  }
+
+  .approved-admin-image {
+    width: 92px;
+  }
+
+  .approved-admin-info h3 {
+    font-size: 0.95rem;
+  }
+
+  .approved-admin-info p {
+    font-size: 0.85rem;
+  }
+}
