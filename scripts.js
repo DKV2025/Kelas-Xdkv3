@@ -207,13 +207,27 @@ document.addEventListener('DOMContentLoaded', async function () {
    NAV AUTH STATUS
 ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const navAuth = document.getElementById('navAuth');
 
   if (!navAuth) return;
 
-  const currentUser =
-    JSON.parse(localStorage.getItem('xdkv3_currentUser'));
+  const currentUser = JSON.parse(localStorage.getItem('xdkv3_currentUser'));
+
+async function hasUnreadMessages(userId) {
+  const { count, error } = await supabaseClient
+    .from('messages')
+    .select('*', { count: 'exact', head: true })
+    .eq('receiver_id', userId)
+    .is('read_at', null);
+
+  if (error) {
+    console.error('Gagal cek unread messages:', error);
+    return false;
+  }
+
+  return count > 0;
+}
 
   if (!currentUser) {
    navAuth.innerHTML = `
@@ -224,16 +238,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  navAuth.innerHTML = `
-    <a href="profile.html" class="profile-chip">
-      <img
-        src="${currentUser.avatar || 'images/pp-01.png'}"
-        alt="Profile"
-      >
+  const unread = await hasUnreadMessages(currentUser.id);
 
-      <span>${currentUser.username}</span>
-    </a>
-  `;
+navAuth.innerHTML = `
+  <a
+    href="inbox.html"
+    class="nav-chat-btn ${unread ? 'has-unread' : ''}"
+    title="Pesan"
+    aria-label="Pesan"
+  >
+    💬
+  </a>
+
+  <a href="profile.html" class="profile-chip">
+    <img src="${currentUser.avatar || 'images/pp-01.png'}" alt="Profile">
+    <span>${currentUser.username}</span>
+  </a>
+`;
 });
 
 /* ============================================
@@ -247,6 +268,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!toast) return;
 
   const currentUser = JSON.parse(localStorage.getItem('xdkv3_currentUser'));
+  async function hasUnreadMessages(userId) {
+  const { count, error } = await supabaseClient
+    .from('messages')
+    .select('*', { count: 'exact', head: true })
+    .eq('receiver_id', userId)
+    .is('read_at', null);
+
+  if (error) {
+    console.error('Gagal cek unread messages:', error);
+    return false;
+  }
+
+  return count > 0;
+}
   const toastClosed = sessionStorage.getItem('xdkv3_loginToastClosed');
   
 
@@ -353,40 +388,55 @@ document.addEventListener('DOMContentLoaded', async () => {
           : 'aspect-square';
 
       card.innerHTML = `
-        <span class="kategori">
-          ${post.category}
+  <span class="kategori">
+    ${post.category}
+  </span>
+
+  <div class="karya-image ${imageClass}">
+    <img src="${post.image_url}" alt="Karya dari ${username}">
+  </div>
+
+  <div class="creator">
+
+    <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
+      <img class="creator-pp"
+        src="${avatar}"
+        alt="Profile">
+    </a>
+
+    <div class="creator-info">
+
+      <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
+        <h4>${username}</h4>
+      </a>
+
+      <span class="post-type-label">
+        ${post.post_type}
+      </span>
+
+      <p>
+        ${post.description || ''}
+      </p>
+
+      <div class="post-bottom-row">
+        <span class="tanggal">
+          ${formatDate(post.approved_at || post.created_at)}
         </span>
 
-        <div class="karya-image ${imageClass}">
-          <img src="${post.image_url}" alt="Karya dari ${username}">
-        </div>
-
-        <a href="profile.html?userId=${post.user_id}" class="creator creator-link">
-
-          <img class="creator-pp"
-            src="${avatar}"
-            alt="Profile">
-
-          <div class="creator-info">
-            <div class="creator-topline">
-              <h4>${username}</h4>
-
-              <span class="post-type-label">
-                ${post.post_type}
-              </span>
-            </div>
-
-            <p>
-              ${post.description || ''}
-            </p>
-
-            <span class="tanggal">
-              ${formatDate(post.approved_at || post.created_at)}
-            </span>
-          </div>
-
+        <a
+          href="chat.html?userId=${post.user_id}&postId=${post.id}"
+          class="post-chat-btn"
+          title="Chat"
+          aria-label="Chat"
+        >
+          💬
         </a>
-      `;
+      </div>
+
+    </div>
+
+  </div>
+`;
 
       karyaScroll.appendChild(card);
     });
