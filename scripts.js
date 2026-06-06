@@ -255,6 +255,38 @@ navAuth.innerHTML = `
     <span>${currentUser.username}</span>
   </a>
 `;
+
+async function renderAdminShortcut() {
+  const adminShortcutWrap = document.getElementById('adminShortcutWrap');
+
+  if (!adminShortcutWrap) return;
+
+  const { data: authData, error: authError } = await supabaseClient.auth.getUser();
+
+  if (authError || !authData.user) {
+    adminShortcutWrap.classList.remove('is-visible');
+    return;
+  }
+
+  const { data: profile, error: profileError } = await supabaseClient
+    .from('profiles')
+    .select('role')
+    .eq('id', authData.user.id)
+    .single();
+
+  if (profileError || !profile) {
+    adminShortcutWrap.classList.remove('is-visible');
+    return;
+  }
+
+  if (profile.role === 'admin') {
+    adminShortcutWrap.classList.add('is-visible');
+  } else {
+    adminShortcutWrap.classList.remove('is-visible');
+  }
+}
+
+await renderAdminShortcut();
 });
 
 /* ============================================
