@@ -2256,3 +2256,46 @@ body {
     height: 9px;
   }
 }
+
+.admin-shortcut-wrap {
+  display: none;
+  width: 100%;
+  padding: 18px 0 8px;
+  text-align: center;
+  background: var(--bg-2);
+}
+
+.admin-shortcut-wrap.is-visible {
+  display: block;
+}
+
+.admin-shortcut-btn {
+  width: 38px;
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  background: rgba(2, 7, 56, 0.08);
+  color: #020738;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 900;
+
+  border: 1px solid rgba(2, 7, 56, 0.12);
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.admin-shortcut-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(2, 7, 56, 0.14);
+  box-shadow: 0 8px 22px rgba(2, 7, 56, 0.08);
+}
