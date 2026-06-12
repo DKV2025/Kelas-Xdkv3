@@ -94,24 +94,53 @@ body {
 }
 
 .inbox-top {
-  position: relative;
-
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  margin-bottom: 80px;
+  margin-bottom: 46px;
 }
 
 .inbox-back {
-  position: absolute;
-  left: 0;
-
   color: #111827;
   text-decoration: none;
 
   font-size: 1.05rem;
   font-weight: 600;
+}
+
+.inbox-columns {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.inbox-section {
+  width: 100%;
+  margin: 0;
+}
+
+.inbox-section-title {
+  margin: 0 0 18px;
+
+  color: rgba(17, 24, 39, 0.72);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+@media (max-width: 768px) {
+  .inbox-top {
+    margin-bottom: 34px;
+  }
+
+  .inbox-columns {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
 }
 
 .inbox-top h1 {
@@ -292,5 +321,116 @@ body {
     margin-top: -8px;
 
     font-size: 0.75rem;
+  }
+}
+
+.inbox-section {
+  width: min(100%, 960px);
+  margin: 0 auto 34px;
+}
+
+.inbox-section-title {
+  margin: 0 0 14px;
+
+  color: rgba(17, 24, 39, 0.58);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.activity-list {
+  display: grid;
+  gap: 14px;
+}
+
+.activity-card {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  gap: 16px;
+
+  padding: 18px 22px;
+
+  border-radius: 14px;
+  background: rgba(203, 214, 229, 0.8);
+
+  color: #111827;
+  text-decoration: none;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  background: #c1cedf;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+.activity-avatar {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.activity-info {
+  min-width: 0;
+}
+
+.activity-info p {
+  margin: 0;
+
+  font-size: .95rem;
+  line-height: 1.45;
+  color: rgba(17, 24, 39, .82);
+}
+
+.activity-info strong {
+  color: #111827;
+}
+
+.activity-info span {
+  color: rgba(17, 24, 39, .56);
+}
+
+.activity-post-thumb {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 10px;
+  object-fit: cover;
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .inbox-section {
+    margin-bottom: 28px;
+  }
+
+  .activity-card {
+    grid-template-columns: 48px 1fr auto;
+    gap: 12px;
+
+    padding: 16px 14px;
+  }
+
+  .activity-avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .activity-post-thumb {
+    width: 46px;
+    height: 46px;
+  }
+
+  .activity-info p {
+    font-size: .86rem;
   }
 }
