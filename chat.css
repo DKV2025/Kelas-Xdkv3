@@ -369,3 +369,17 @@ body {
     font-size: 1.75rem;
   }
 }
+
+.chat-user-avatar,
+.chat-user-info {
+  cursor: pointer;
+}
+
+.chat-user-info h1 {
+  transition: opacity .2s ease;
+}
+
+.chat-user-info:hover h1 {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
