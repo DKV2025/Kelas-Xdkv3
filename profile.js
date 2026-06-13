@@ -174,6 +174,18 @@ if (profileChatBtn) {
     }
   }
 
+  function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[char];
+  });
+}
+
   async function renderMyWorks() {
     if (!myWorkList) return;
 
@@ -211,39 +223,47 @@ if (profileChatBtn) {
           ? 'aspect-original'
           : 'aspect-square';
 
+const postType = escapeHTML(post.post_type);
+const category = escapeHTML(post.category);
+const description = escapeHTML(post.description || '');
+const imageUrl = escapeHTML(post.image_url);
+const username = escapeHTML(profileUser.username || 'User');
+const postId = escapeHTML(post.id);
+const imagePath = escapeHTML(post.image_path || '');
+
       card.innerHTML = `
-        <div class="work-info">
-          <div class="work-meta">
-            <p>Type : ${post.post_type}</p>
-            <p>Category : ${post.category}</p>
-          </div>
+  <div class="work-info">
+    <div class="work-meta">
+      <p>Type : ${postType}</p>
+      <p>Category : ${category}</p>
+    </div>
 
-          <p class="work-description">
-            ${post.description || ''}
-          </p>
+    <p class="work-description">
+      ${description}
+    </p>
 
-          <span class="work-date">
-            ${formatDate(post.approved_at || post.created_at)}
-          </span>
-        </div>
+    <span class="work-date">
+      ${formatDate(post.approved_at || post.created_at)}
+    </span>
+  </div>
 
-        <div class="work-image ${imageClass}">
-          <img src="${post.image_url}" alt="Karya ${profileUser.username}">
+  <div class="work-image ${imageClass}">
+    <img src="${imageUrl}" alt="Karya ${username}">
 
-          ${isOwnProfile ? `
-            <button
-              type="button"
-              class="delete-work-btn"
-              data-id="${post.id}"
-              data-path="${post.image_path || ''}"
-              title="Hapus postingan"
-              aria-label="Hapus postingan"
-            >
-              🗑
-            </button>
-          ` : ''}
-        </div>
-      `;
+    ${isOwnProfile ? `
+      <button
+        type="button"
+        class="delete-work-btn"
+        data-id="${postId}"
+        data-path="${imagePath}"
+        title="Hapus postingan"
+        aria-label="Hapus postingan"
+      >
+        🗑
+      </button>
+    ` : ''}
+  </div>
+`;
 
       myWorkList.appendChild(card);
     });
@@ -412,6 +432,19 @@ if (instagramInput) {
 
       if (avatarInput && avatarInput.files && avatarInput.files[0]) {
   const avatarFile = avatarInput.files[0];
+
+  const allowedAvatarTypes = ['image/jpeg', 'image/png', 'image/webp'];
+const maxAvatarSize = 2 * 1024 * 1024;
+
+if (!allowedAvatarTypes.includes(avatarFile.type)) {
+  alert('Avatar harus berupa JPG, PNG, atau WEBP.');
+  return;
+}
+
+if (avatarFile.size > maxAvatarSize) {
+  alert('Ukuran avatar maksimal 2MB.');
+  return;
+}
 
   const fileExt = avatarFile.name.split('.').pop();
   const filePath = `${authUser.id}/avatar-${Date.now()}.${fileExt}`;
