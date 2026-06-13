@@ -52,16 +52,19 @@ document.addEventListener('DOMContentLoaded', async function () {
       slide.className = 'slide featured-slide';
       slide.dataset.featuredId = post.id;
 
-      const username = post.profiles?.username || 'User';
+      const username = escapeHTML(post.profiles?.username || 'User');
+const category = escapeHTML(post.category);
+const description = escapeHTML(post.description || '');
+const imageUrl = escapeHTML(post.image_url);
 
       slide.innerHTML = `
-        <img src="${post.image_url}" alt="Featured karya ${username}">
+        <img src="${imageUrl}" alt="Featured karya ${username}">
 
-        <div class="featured-slide-info">
-          <span>${post.category}</span>
-          <h2>${username}</h2>
-          <p>${post.description || ''}</p>
-        </div>
+<div class="featured-slide-info">
+  <span>${category}</span>
+  <h2>${username}</h2>
+  <p>${description}</p>
+</div>
       `;
 
       if (firstHiddenClone) {
@@ -519,8 +522,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       const card = document.createElement('article');
       card.className = 'karya-card';
 
-      const username = post.profiles?.username || 'User';
-      const avatar = post.profiles?.avatar_url || 'images/pp-01.png';
+      const username = escapeHTML(post.profiles?.username || 'User');
+const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
+const category = escapeHTML(post.category);
+const postType = escapeHTML(post.post_type);
+const description = escapeHTML(post.description || '');
+const imageUrl = escapeHTML(post.image_url);
+const userId = encodeURIComponent(post.user_id);
+const postId = escapeHTML(post.id);
 
       const imageClass =
         post.aspect_mode === 'original'
