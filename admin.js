@@ -119,17 +119,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.className = 'review-card';
       card.dataset.id = post.id;
 
-      const username = post.profiles?.username || 'User';
-      const imageClass = post.aspect_mode === 'original'
-        ? 'aspect-original'
-        : 'aspect-square';
+      const username = escapeHTML(post.profiles?.username || 'User');
+const category = escapeHTML(post.category);
+const postType = escapeHTML(post.post_type);
+const description = escapeHTML(post.description || '');
+const imageUrl = escapeHTML(post.image_url);
+
+const imageClass = post.aspect_mode === 'original'
+  ? 'aspect-original'
+  : 'aspect-square';
 
       card.innerHTML = `
         <div class="review-content">
 
           <div>
             <div class="review-image ${imageClass}">
-              <img src="${post.image_url}" alt="Karya dari ${username}">
+              <img src="${imageUrl}" alt="Karya dari ${username}">
             </div>
 
             <h2 class="request-user">
@@ -140,12 +145,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="review-info">
 
             <div class="review-meta">
-              <p>${post.category}</p>
-              <p>${post.post_type}</p>
+              <p>${category}</p>
+              <p>${postType}</p>
             </div>
 
             <p class="review-description">
-              ${post.description || ''}
+              ${description}
             </p>
 
             <span class="work-date">
@@ -192,11 +197,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.className = 'approved-admin-card';
       card.dataset.id = post.id;
 
-      const username = post.profiles?.username || 'User';
+      const username = escapeHTML(post.profiles?.username || 'User');
+const category = escapeHTML(post.category);
+const description = escapeHTML(post.description || '');
+const imageUrl = escapeHTML(post.image_url);
 
       card.innerHTML = `
         <div class="approved-admin-image">
-          <img src="${post.image_url}" alt="Karya ${username}">
+          <img src="${imageUrl}" alt="Karya ${username}">
+          <h3>${username}</h3>
+          <p>${category}</p>
+          <p>${description}</p>
         </div>
 
         <div class="approved-admin-info">
@@ -219,43 +230,51 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function approvePost(postId) {
-    const { error } = await supabaseClient
-      .from('posts')
-      .update({
-        status: 'approved',
-        approved_at: new Date().toISOString(),
-        declined_at: null
-      })
-      .eq('id', postId);
+  const { error } = await supabaseClient
+    .from('posts')
+    .update({
+      status: 'approved',
+      approved_at: new Date().toISOString(),
+      declined_at: null
+    })
+    .eq('id', postId);
 
-    if (error) {
-      console.error(error);
-      alert('Gagal approve postingan.');
-      return;
-    }
-
-    await renderPendingPosts();
-    await renderApprovedWorks();
+  if (error) {
+    console.error(error);
+    alert('Gagal approve postingan.');
+    return;
   }
+
+  await logActivity('approve_post', 'post', postId, {
+    page: 'admin.html'
+  });
+
+  await renderPendingPosts();
+  await renderApprovedWorks();
+}
 
   async function declinePost(postId) {
-    const { error } = await supabaseClient
-      .from('posts')
-      .update({
-        status: 'declined',
-        declined_at: new Date().toISOString(),
-        is_featured: false
-      })
-      .eq('id', postId);
+  const { error } = await supabaseClient
+    .from('posts')
+    .update({
+      status: 'declined',
+      declined_at: new Date().toISOString(),
+      is_featured: false
+    })
+    .eq('id', postId);
 
-    if (error) {
-      console.error(error);
-      alert('Gagal decline postingan.');
-      return;
-    }
-
-    await renderPendingPosts();
+  if (error) {
+    console.error(error);
+    alert('Gagal decline postingan.');
+    return;
   }
+
+  await logActivity('decline_post', 'post', postId, {
+    page: 'admin.html'
+  });
+
+  await renderPendingPosts();
+}
 
   async function toggleFeatured(postId) {
     const { data: post, error: getError } = await supabaseClient
@@ -282,6 +301,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       alert('Gagal mengubah featured.');
       return;
     }
+    await logActivity('toggle_featured', 'post', postId, {
+  page: 'admin.html',
+  new_value: !post.is_featured
+});
+
+await renderApprovedWorks();
 
     await renderApprovedWorks();
   }
