@@ -1,4 +1,6 @@
-
+/* ============================================
+   RESET & BASE
+   ============================================ */
 *, *::before, *::after { box-sizing: border-box; }
  
 img { display: block; max-width: 100%; height: auto; }
@@ -14,7 +16,9 @@ html {
   scroll-padding-top: 64px;
 }
  
-
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
 :root {
   /* Palet baru: biru-hitam-putih */
   --bg:       #e6ecff;       /* background utama — navy sangat gelap */
@@ -52,13 +56,17 @@ body {
   background: var(--bg);
 }
  
-
+/* ============================================
+   CONTAINER
+   ============================================ */
 .container {
   width: min(100% - 2rem, var(--container));
   margin-inline: auto;
 }
  
-
+/* ============================================
+   HEADER
+   ============================================ */
 .site-header {
   position: sticky;
   top: 0;
@@ -106,7 +114,9 @@ body {
   background: rgba(255,255,255,.06);
 }
  
-
+/* ============================================
+   NAV AUTH
+============================================ */
 
 .nav-auth {
   display: flex;
@@ -165,16 +175,15 @@ body {
   white-space: nowrap;
 }
 
-
-
-
-
+/* ============================================
+   HERO — SLIDESHOW
+   ============================================ */
 .hero {
   position: relative;
   overflow: hidden;
 }
  
-
+/* ── Slideshow wrapper ── */
 .slideshow {
   position: relative;
   width: 100%;
@@ -183,7 +192,7 @@ body {
   background: #e3e9f8;
 }
  
-
+/* ── Track (semua slide berjajar vertikal) ── */
 .slides-track {
   display: flex;
   align-items: center;
@@ -195,7 +204,7 @@ body {
   will-change: transform;
 }
  
-
+/* ── Satu slide ── */
 .slide {
   flex: 0 0 80%;
   height: 100%;
@@ -233,8 +242,7 @@ body {
   filter: brightness(.88);
 }
  
-
-
+/* ── Tombol skip kiri/kanan ── */
 .slide-controls {
   position: absolute;
   bottom: 18px;
@@ -270,8 +278,7 @@ body {
   transform: scale(.95);
 }
  
-
-
+/* ── Brand bar: logo + tagline di bawah slideshow ── */
 .hero-brand-bar {
   background: var(--bg-2);
   border-bottom: 1px solid var(--line);
@@ -302,10 +309,9 @@ body {
   color: var(--text);
 }
  
-
-
-
-
+/* ============================================
+   SECTIONS — shared
+   ============================================ */
 .section {
   padding: 40px 0;
   border-bottom: 1px solid var(--line);
@@ -414,10 +420,9 @@ body {
   opacity: .6;
   cursor: wait;
 }
-
-
-
-
+/* ============================================
+   TENTANG
+   ============================================ */
 .tentang-grid {
   display: grid;
   grid-template-columns: 1.3fr .7fr;
@@ -479,8 +484,9 @@ body {
   object-fit: contain;
 }
  
-
-
+/* ============================================
+   KARYA SISWA
+============================================ */
 
 .karya-showcase {
   width: 100%;
@@ -607,10 +613,9 @@ body {
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.14);
 }
 
-
-
-
-
+/* =========================
+   VERTICAL FEED
+========================= */
 
 .karya-scroll {
   width: 100%;
@@ -628,10 +633,9 @@ body {
   padding-bottom: 40px;
 }
 
-
-
-
-
+/* =========================
+   CARD
+========================= */
 
 .karya-card {
   width: min(100%, 720px);
@@ -704,10 +708,9 @@ body {
 }
 
 
-
-
-
-
+/* ============================================
+   CARA BERKARYA
+   ============================================ */
 .clean-points {
   margin: 0;
   padding-left: 1.1rem;
@@ -717,10 +720,9 @@ body {
   font-size: var(--sm);
 }
  
-
-
-
-
+/* ============================================
+   STRUKTUR
+   ============================================ */
 .struktur-top {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -783,11 +785,9 @@ body {
   font-size: .8rem;
 }
  
-
-
-
-
-
+/* ============================================
+   GALERI
+   ============================================ */
 .galeri-swipe {
   overflow: visible;
 }
@@ -826,11 +826,9 @@ body {
   background: #d7e1f3;
 }
  
-
-
-
-
-
+/* ============================================
+   FOOTER
+   ============================================ */
 .site-footer {
   padding: 36px 0 48px;
   background: var(--bg-2);
@@ -848,7 +846,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--card);
+  background: rgba(230, 236, 255, 0.8);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 16px 6px 8px;
@@ -905,9 +903,9 @@ body {
 .credit-name   { margin: 0; font-size: .85rem; font-weight: 700; }
 .credit-sub    { margin: 0; font-size: .75rem; color: var(--muted); }
  
-
-
-
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 860px) {
   .tentang-grid        { grid-template-columns: 1fr; }
   .struktur-top        { grid-template-columns: 1fr; }
@@ -951,21 +949,17 @@ body {
   .hero-title   { font-size: 1.6rem; }
 }
  
-
-
-
-
+/* ============================================
+   FOCUS / ACCESSIBILITY
+   ============================================ */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-
-
-
-
-
-
+/* ====================================
+   Mobile Version!!!
+  =================================== */
   @media (max-width: 768px) {
   .karya-showcase {
     padding: 60px 5%;
@@ -1078,7 +1072,9 @@ body {
 
 
 
-
+/* ===============================
+         UPLOAD
+==================================-*/
 .custom-select.open .select-options {
   display: block;
 }
@@ -1190,7 +1186,7 @@ body {
   position: relative;
   z-index: 1;
 }
-
+/*sampe die /\*/
 
 .preview-image-placeholder.has-image {
   background: transparent;
@@ -1233,7 +1229,9 @@ body {
   transform: none;
 }
 
-
+/* ============================================
+   UPLOAD PAGE
+============================================ */
 .upload-back-btn {
   display: inline-flex;
   align-items: center;
@@ -1394,7 +1392,9 @@ body {
 }
 
 
-
+/* =========================
+   IMAGE RATIO OPTION
+========================= */
 
 .aspect-field {
   margin: 0 auto 40px;
@@ -1583,9 +1583,7 @@ body {
 }
 
 
-
-
-
+/* Preview postingan */
 
 .upload-post-preview {
   width: min(100%, 720px);
@@ -1684,8 +1682,9 @@ body {
   font-size: 1.05rem;
 }
 
-
-
+/* ============================================
+   LOGIN TOAST
+============================================ */
 
 .login-toast {
   position: fixed;
