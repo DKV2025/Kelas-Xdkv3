@@ -102,11 +102,19 @@ body {
 }
 
 .inbox-back {
-  color: #111827;
-  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 57px;
+  background: #aaacce;;
+  border-radius: 18px;
+  position: relative;
+}
 
-  font-size: 1.05rem;
-  font-weight: 600;
+.inbox-back:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.04);
 }
 
 .inbox-columns {
