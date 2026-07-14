@@ -1232,21 +1232,16 @@ body {
    UPLOAD PAGE
 ============================================ */
 .upload-back-btn {
-  display: inline-flex;
+    display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-
-  margin-bottom: 28px;
-
-  color: #09071f;
-  text-decoration: none;
-
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 800;
-
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
   position: relative;
-  z-index: 5;
+  text-decoration: none;
+  color: rgb(42, 41, 51);
 
   transition:
     transform .2s ease,
@@ -1363,7 +1358,7 @@ body {
 }
 
 .post-type-btn {
-  width: 280px;
+  width: 100px;
   height: 54px;
 
   border: none;
