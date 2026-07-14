@@ -45,6 +45,20 @@ body {
   background: #d8c9dc;
 }
 
+.profile-action-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 32px;
+  background:  #222933;
+  border-radius: 10px;
+  position: relative;
+  border: none;
+  color:#eef7f9;
+  text-decoration: none;
+}
+
 .edit-profile-link {
   color: #527086;
   text-decoration: none;
@@ -90,33 +104,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90px;
-  height: 47px;
-  background: #aaacce;;
-  border-radius: 18px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
   position: relative;
   text-decoration: none;
-  color: black;
+  color: rgb(42, 41, 51);
 }
 
-.back:hover {
+.profile-back-btn:hover {
   transform: translateY(-3px);
   filter: brightness(1.04);
 }
 
 .profile-chat-btn {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   justify-content: center;
-
-  padding: 10px 18px;
-  border-radius: 999px;
-
-  background: #09071f;
-  color: #fff;
-
-  text-decoration: none;
-  font-weight: 800;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+  background:  #222933;
+  border-radius: 10px;
+  position: relative;
+  border: none;
+  color:#eef7f9;
 
   transition:
     transform .2s ease,
@@ -145,9 +157,10 @@ body {
   align-items: center;
   width: auto;
   height: 50px;
-  background: #aaacce;;
-  border-radius: 18px;
+  background:  #222933;
+  border-radius: 10px;
   position: relative;
+  color:#f4f7fb;
 }
 
 .my-work-list {
@@ -241,12 +254,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
-  height: 43px;
-  background: #aaacce;;
-  border-radius: 18px;
+  width: 60px;
+  height: 30px;
+  background:  #222933;
+  border-radius: 10px;
   position: relative;
   border: none;
+  color:#eef7f9;
 }
 
 .logout-btn:hover {
