@@ -1,51 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const resetForm = document.getElementById('resetForm');
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password - XI DKV</title>
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
 
- 
-  supabaseClient.auth.onAuthStateChange((event) => {
-    if (event === 'PASSWORD_RECOVERY') {
-      console.log('Mode recovery aktif, siap ganti password.');
-    }
-  });
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Buat Password Baru</h1>
+      <p style="margin-bottom: 28px; color: #ffffff; font-size: 1.1rem;">Buat yang password lebih mudah diingat.</p>
 
-  if (resetForm) {
-    resetForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      <form class="auth-form" id="resetForm">
+        <div class="auth-input-group">
+          <span class="auth-icon">🔒</span>
+          <input type="password" id="newPassword" placeholder="Password Baru" required>
+        </div>
 
-      const newPassword = document.getElementById('newPassword').value.trim();
-      const confirmPassword = document.getElementById('confirmNewPassword').value.trim();
-      const submitBtn = resetForm.querySelector('button[type="submit"]');
+        <div class="auth-input-group">
+          <span class="auth-icon">🔒</span>
+          <input type="password" id="confirmNewPassword" placeholder="Verifikasi Password" required>
+        </div>
 
-      if (newPassword !== confirmPassword) {
-        alert('Password dan verifikasi berbeda.');
-        return;
-      }
+        <button type="submit" class="auth-btn">
+          Simpan
+        </button>
+      </form>
 
-      if (newPassword.length < 6) {
-        alert('Password minimal 6 karakter.');
-        return;
-      }
+    </section>
+  </main>
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Menyimpan';
-
-    
-      const { error } = await supabaseClient.auth.updateUser({
-        password: newPassword
-      });
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Simpan';
-
-      if (error) {
-        alert('Gagal update password: ' + error.message);
-        console.error(error);
-        return;
-      }
-
-      alert('Password berhasil diganti!');
-
-      window.location.href = 'login.html';
-    });
-  }
-});
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="reset.js"></script>
+</body>
+</html>
