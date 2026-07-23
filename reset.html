@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password - XI DKV</title>
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Buat Password Baru</h1>
+      <p style="margin-bottom: 28px; color: #ffffff; font-size: 1.1rem;">Buat password lebih mudah diingat.</p>
+
+      <form class="auth-form" id="resetForm">
+        <div class="auth-input-group">
+          <span class="auth-icon">🔒</span>
+          <input type="password" id="newPassword" placeholder="Password Baru" required>
+        </div>
+
+        <div class="auth-input-group">
+          <span class="auth-icon">🔒</span>
+          <input type="password" id="confirmNewPassword" placeholder="Verifikasi Password" required>
+        </div>
+
+        <button type="submit" class="auth-btn">
+          Simpan
+        </button>
+      </form>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="reset.js"></script>
+</body>
+</html>

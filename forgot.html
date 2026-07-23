@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lupa Password - XI DKV</title>
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Lupa Password?</h1>
+      <p style="margin-bottom: 28px; color: #ffffff; font-size: 1.1rem;">Masukkan email akun dibawah untuk mendapatkan link reset password.</p>
+
+      <form class="auth-form" id="forgotForm">
+        <div class="auth-input-group">
+          <span class="auth-icon">✉️</span>
+          <input type="email" id="forgotEmail" placeholder="Masukkan email" required>
+        </div>
+
+        <button type="submit" class="auth-btn">
+          Kirim Link
+        </button>
+      </form>
+
+      <p class="auth-switch">
+        <a href="login.html">Kembali</a>
+      </p>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="forgot.js"></script>
+</body>
+</html>
