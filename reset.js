@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = resetForm.querySelector('button[type="submit"]');
 
       if (newPassword !== confirmPassword) {
-        alert('Password dan verifikasinya beda tuh.');
+        alert('Password dan verifikasi berbeda.');
         return;
       }
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Nyimpen...';
+      submitBtn.textContent = 'Menyimpan';
 
     
       const { error } = await supabaseClient.auth.updateUser({
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      alert('Password berhasil diganti! Login lagi pake password lu yang baru.');
+      alert('Password berhasil diganti!');
 
       window.location.href = 'login.html';
     });
