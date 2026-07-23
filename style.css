@@ -69,8 +69,9 @@ body {
    ============================================ */
 .site-header {
   position: sticky;
-  top: 0;
-  z-index: 50;
+  position: -webkit-sticky;
+  top: 5;
+  z-index: 100;
   background: rgba(10, 15, 30, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
