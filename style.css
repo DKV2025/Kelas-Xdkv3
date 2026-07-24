@@ -1,6 +1,4 @@
-/* ============================================
-   RESET & BASE
-   ============================================ */
+
 *, *::before, *::after { box-sizing: border-box; }
  
 img { display: block; max-width: 100%; height: auto; }
@@ -16,11 +14,8 @@ html {
   scroll-padding-top: 64px;
 }
  
-/* ============================================
-   DESIGN TOKENS
-   ============================================ */
+/*<--- Design Token --->*/
 :root {
-  /* Palet baru: biru-hitam-putih */
   --bg:       #e6ecff;       /* background utama — navy sangat gelap */
   --bg-2:     #aec4cc;       /* sedikit lebih terang */
   --card:     #c5cbe0;       /* kartu/panel */
