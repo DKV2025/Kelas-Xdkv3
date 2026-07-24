@@ -1,6 +1,28 @@
-/* ============================================
-   SLIDESHOW HERO
-============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.site-header');
+  
+  const triggerSection = document.querySelector('.hero-brand-bar');
+
+  if (header && triggerSection) {
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      
+      
+      const triggerTop = triggerSection.offsetTop;
+
+      
+      if (scrollPos >= triggerTop - 50) {
+        header.classList.add('is-sticky');
+        document.body.style.paddingTop = header.offsetHeight + 'px';
+      } 
+      
+      else if (scrollPos <= 10) {
+        header.classList.remove('is-sticky');
+        document.body.style.paddingTop = '0';
+      }
+    });
+  }
+});
 
 document.addEventListener('DOMContentLoaded', async function () {
   const track = document.getElementById('slidesTrack');
@@ -37,7 +59,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!featuredPosts || featuredPosts.length === 0) {
       return;
     }
-
     const hiddenClones = track.querySelectorAll('.slide[aria-hidden="true"]');
     const firstHiddenClone = hiddenClones[0] || null;
 
@@ -503,101 +524,125 @@ document.addEventListener('DOMContentLoaded', async () => {
     return data || [];
   }
 
-  async function renderApprovedPosts() {
-    const posts = await getApprovedPosts();
+  // Simpan semua karya di memori biar filternya ngebut (gak perlu fetch DB terus)
+  let allApprovedPosts = [];
+
+  async function renderApprovedPosts(categoryFilter = 'Semua') {
+    // Kalo array masih kosong, ambil dari Supabase
+    if (allApprovedPosts.length === 0) {
+      allApprovedPosts = await getApprovedPosts();
+    }
 
     karyaScroll.innerHTML = '';
 
-    if (posts.length === 0) {
+    // Nyaring postingan sesuai kategori yang dipilih
+    const filteredPosts = categoryFilter === 'Semua' 
+      ? allApprovedPosts 
+      : allApprovedPosts.filter(post => post.category === categoryFilter);
+
+    if (filteredPosts.length === 0) {
       karyaScroll.innerHTML = `
-        <div class="empty-karya">
-          <h3>Belum ada karya yang tampil.</h3>
+        <div class="empty-karya" style="text-align:center; padding: 40px;">
+          <h3>Belum ada karya di kategori ini.</h3>
           <p>Karya akan muncul setelah admin approve postingan.</p>
         </div>
       `;
       return;
     }
 
-    posts.forEach((post) => {
+    
+    filteredPosts.forEach((post) => {
       const card = document.createElement('article');
       card.className = 'karya-card';
 
       const username = escapeHTML(post.profiles?.username || 'User');
-const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
-const category = escapeHTML(post.category);
-const postType = escapeHTML(post.post_type);
-const description = escapeHTML(post.description || '');
-const imageUrl = escapeHTML(post.image_url);
-const userId = encodeURIComponent(post.user_id);
-const postId = escapeHTML(post.id);
+      const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
+      const category = escapeHTML(post.category);
+      const postType = escapeHTML(post.post_type);
+      const description = escapeHTML(post.description || '');
+      const imageUrl = escapeHTML(post.image_url);
+      const postId = escapeHTML(post.id);
 
-      const imageClass =
-        post.aspect_mode === 'original'
-          ? 'aspect-original'
-          : 'aspect-square';
+      const imageClass = post.aspect_mode === 'original' ? 'aspect-original' : 'aspect-square';
 
       card.innerHTML = `
-  <span class="kategori">
-    ${post.category}
-  </span>
-
-  <div class="karya-image ${imageClass}">
-    <img src="${post.image_url}" alt="Karya dari ${username}">
-  </div>
-
-  <div class="creator">
-
-    <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
-      <img class="creator-pp"
-        src="${avatar}"
-        alt="Profile">
-    </a>
-
-    <div class="creator-info">
-
-      <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
-        <h4>${username}</h4>
-      </a>
-
-      <span class="post-type-label">
-        ${post.post_type}
-      </span>
-
-      <p>
-        ${post.description || ''}
-      </p>
-
-      <div class="post-bottom-row">
-  <span class="tanggal">
-    ${formatDate(post.approved_at || post.created_at)}
-  </span>
-
-  <div class="post-actions">
-    <button
-      type="button"
-      class="post-like-btn"
-      data-post-id="${post.id}"
-      aria-label="Like"
-    >
-      ♡ <span class="like-count" data-like-count="${post.id}">0</span>
-    </button>
-
-    <a
-      href="chat.html?userId=${post.user_id}&postId=${post.id}"
-      class="post-chat-btn"
-      title="Chat"
-      aria-label="Chat"
-    >
-      💬
-    </a>
-  </div>
-</div>
-`;
-
+        <span class="kategori">${category}</span>
+        
+        <div class="karya-image ${imageClass}">
+          <!-- 1. Kita selipin div cahaya di sini -->
+          <div class="shimmer-effect"></div>
+          
+          <!-- 2. Tambahin atribut onload di tag img ini -->
+          <img 
+            src="${imageUrl}" 
+            alt="Karya dari ${username}" 
+            loading="lazy"
+            onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
+          >
+        </div>
+        
+        <div class="creator">
+          <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
+            <img class="creator-pp" src="${avatar}" alt="Profile">
+          </a>
+          <div class="creator-info">
+            <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
+              <h4>${username}</h4>
+            </a>
+            <span class="post-type-label">${postType}</span>
+            <p>${description}</p>
+            <div class="post-bottom-row">
+              <span class="tanggal">${formatDate(post.approved_at || post.created_at)}</span>
+              <div class="post-actions">
+                <button type="button" class="post-like-btn" data-post-id="${postId}" aria-label="Like">
+                  ♡ <span class="like-count" data-like-count="${postId}">0</span>
+                </button>
+                <a href="chat.html?userId=${post.user_id}&postId=${postId}" class="post-chat-btn" title="Chat" aria-label="Chat">
+                  💬
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
       karyaScroll.appendChild(card);
+    });
+
+    // Panggil ulang event tombol like karena HTML-nya baru ke-render
+    await setupLikeButtons();
+  }
+
+  // ============================================
+  // LOGIC ANIMASI & KLIK FILTER
+  // ============================================
+  const bar = document.getElementById('filterBar');
+  const toggle = document.getElementById('filterToggle');
+  const chips = document.querySelectorAll('.chip');
+
+  if (toggle && bar) {
+    // Buka-tutup filter bar
+    toggle.addEventListener('click', () => {
+      const isOpen = bar.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Pas chip kategori diklik
+    chips.forEach(chip => {
+      chip.addEventListener('click', async () => {
+        // Copot class selected dari semua chip
+        chips.forEach(c => c.classList.remove('selected'));
+        // Pasang class selected ke chip yang diklik
+        chip.classList.add('selected');
+        
+        const selectedCategory = chip.getAttribute('data-cat');
+        
+        // Render karya berdasarkan kategori
+        await renderApprovedPosts(selectedCategory);
+      });
     });
   }
 
-    await renderApprovedPosts();
+  // Render semua karya saat web pertama kali dibuka
+  await renderApprovedPosts('Semua');
   await setupLikeButtons();
 });
