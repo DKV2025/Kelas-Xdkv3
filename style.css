@@ -16,15 +16,15 @@ html {
  
 /*<--- Design Token --->*/
 :root {
-  --bg:       #e6ecff;       /* background utama — navy sangat gelap */
-  --bg-2:     #aec4cc;       /* sedikit lebih terang */
-  --card:     #c5cbe0;       /* kartu/panel */
+  --bg:       #e6ecff;    
+  --bg-2:     #aec4cc;       
+  --card:     #c5cbe0;   
   --line:     rgba(255, 255, 255, 0.09);
-  --accent:   #3b82f6;       /* biru cerah — aksen utama */
-  --accent-2: #1d4ed8;       /* biru lebih dalam */
+  --accent:   #3b82f6;      
+  --accent-2: #1d4ed8;       
  
-  --text:     #000000;       /* putih sedikit kebiruan */
-  --muted:    #222933;       /* abu-biru untuk teks sekunder */
+  --text:     #000000;      
+  --muted:    #222933;       
   --tk:       #dfeff5;
  
   --font-body:    "DM Sans",  system-ui, sans-serif;
