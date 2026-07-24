@@ -100,6 +100,29 @@
 <a href="upload.html" class="upload-entry-btn">
   Upload karya
 </a>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-toggle" id="filterToggle" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <line x1="2" y1="4" x2="14" y2="4"/><circle cx="6" cy="4" r="1.6" fill="currentColor" stroke="none"/>
+      <line x1="2" y1="8" x2="14" y2="8"/><circle cx="10" cy="8" r="1.6" fill="currentColor" stroke="none"/>
+      <line x1="2" y1="12" x2="14" y2="12"/><circle cx="4" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="label">Filter</span>
+  </button>
+
+  <div class="categories" id="categories">
+    <span class="chip selected" data-cat="Semua">Semua</span>
+    <span class="chip" data-cat="Digital art">Digital Art</span>
+    <span class="chip" data-cat="Photography">Photography</span>
+    <span class="chip" data-cat="Editing">Editing</span>
+    <span class="chip" data-cat="Traditional art">Traditional Art</span>
+    <span class="chip" data-cat="Design/Poster">Design/Poster</span>
+  </div>
+</div>
+
+
   <div class="karya-scroll" id="approvedPostsContainer">
 
     <!-- CARD 1 -->
@@ -187,29 +210,37 @@
       <div class="container">
         <h2 id="struktur-title" class="section-title">Pengurus XI DKV</h2>
 
-        
         <div class="struktur-top">
-          <article class="person">
-            <img src="images/anggota-03.webp" alt="Foto wali kelas" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Ketua Angkatan</p>
-              <h3 class="person-name">Elpan Setia Nugraha</h3>
-              <p class="person-sub">XI DKV 3</p>
-            </div>
-          </article>
+        <article class="person" tabindex="0">
+  <img src="images/anggota-03.webp" alt="Foto Elpan" loading="lazy" />
+  <div class="person-meta">
+    <p class="person-role">Ketua Angkatan</p>
+    <h3 class="person-name">Elpan Setia Nugraha</h3>
+    <p class="person-sub">XI DKV 3</p>
+  </div>
+  <div class="person-ig-overlay">
+    <a href="https://www.instagram.com/elpansetiaa_?igsh=MXN4d3V5NngydmR4bw==" target="_blank" class="ig-btn">
+      @elpansetiaa_
+    </a>
+  </div>
+</article>
 
-          <article class="person">
-            <img src="images/anggota-02.webp" alt="Foto wali murid" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wakil Ketua Angkatan</p>
-              <h3 class="person-name">Ghatfan</h3>
-              <p class="person-sub">XI DKV 1</p>
-            </div>
-          </article>
-        </div>
 
-     
-    </section>
+<article class="person" tabindex="0">
+  <img src="images/anggota-02.webp" alt="Foto Ghatfan" loading="lazy" />
+  <div class="person-meta">
+    <p class="person-role">Wakil Ketua Angkatan</p>
+    <h3 class="person-name">Ghatfan</h3>
+    <p class="person-sub">XI DKV 1</p>
+  </div>
+  <div class="person-ig-overlay">
+    <a href="https://www.instagram.com/ghan_syn?igsh=MTd1cGdudHo2eTIxcQ==" target="_blank" class="ig-btn">
+      @ghan_syn
+    </a>
+  </div>
+</div>
+</article>
+</section>
 
 
     <!-- ═══════════════════════════════════════
