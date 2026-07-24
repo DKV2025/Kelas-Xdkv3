@@ -1,4 +1,6 @@
-
+/* ============================================
+   RESET & BASE
+   ============================================ */
 *, *::before, *::after { box-sizing: border-box; }
  
 img { display: block; max-width: 100%; height: auto; }
@@ -6,7 +8,7 @@ a   { color: inherit; text-decoration: none; }
  
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
  
 html {
@@ -14,17 +16,20 @@ html {
   scroll-padding-top: 64px;
 }
  
-/*<--- Design Token --->*/
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
 :root {
-  --bg:       #e6ecff;    
-  --bg-2:     #aec4cc;       
-  --card:     #c5cbe0;   
+  /* Palet baru: biru-hitam-putih */
+  --bg:       #e6ecff;       /* background utama — navy sangat gelap */
+  --bg-2:     #aec4cc;       /* sedikit lebih terang */
+  --card:     #c5cbe0;       /* kartu/panel */
   --line:     rgba(255, 255, 255, 0.09);
-  --accent:   #3b82f6;      
-  --accent-2: #1d4ed8;       
+  --accent:   #3b82f6;       /* biru cerah — aksen utama */
+  --accent-2: #1d4ed8;       /* biru lebih dalam */
  
-  --text:     #000000;      
-  --muted:    #222933;       
+  --text:     #000000;       /* putih sedikit kebiruan */
+  --muted:    #222933;       /* abu-biru untuk teks sekunder */
   --tk:       #dfeff5;
  
   --font-body:    "DM Sans",  system-ui, sans-serif;
@@ -63,14 +68,31 @@ body {
    HEADER
    ============================================ */
 .site-header {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
+  position: relative; /* Balikin ke relative biar gak ngelindes konten bawahnya */
   z-index: 50;
+  width: 100%;
   background: rgba(10, 15, 30, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
+}
+
+.site-header.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+/* Animasi biar navbarnya turun smooth dari atas layar */
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
  
 .header-inner {
@@ -608,6 +630,108 @@ body {
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.14);
 }
 
+/*<--Filter bar-->*/
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 28px;
+  min-height: 40px;
+  position: relative;
+  z-index: 0;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(2, 7, 56, 0.12);
+  border-radius: 20px;
+  padding: 9px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #09071f;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 12px rgba(2, 7, 56, 0.05);
+}
+
+.filter-toggle:hover { background: #f7f7fb; }
+.filter-toggle svg { display: block; }
+
+.filter-toggle .label {
+  transition: opacity .15s ease, width .15s ease;
+}
+
+.filter-bar.open .filter-toggle .label {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.filter-bar.open .filter-toggle {
+  padding: 9px 12px;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 10px;
+}
+
+.categories::-webkit-scrollbar { display: none; }
+
+.chip {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: color .15s ease;
+}
+
+.chip:hover {
+  color: #002c74;
+  text-decoration: underline;
+}
+
+.chip.selected {
+  color: var(--accent, #3b82f6);
+  font-weight: 700;
+}
+
+.filter-bar.open .chip {
+  animation: chip-in .32s cubic-bezier(.2,.7,.3,1) forwards;
+}
+
+.filter-bar.open .chip:nth-child(1) { animation-delay: .03s; }
+.filter-bar.open .chip:nth-child(2) { animation-delay: .08s; }
+.filter-bar.open .chip:nth-child(3) { animation-delay: .13s; }
+.filter-bar.open .chip:nth-child(4) { animation-delay: .18s; }
+.filter-bar.open .chip:nth-child(5) { animation-delay: .23s; }
+.filter-bar.open .chip:nth-child(6) { animation-delay: .28s; }
+
+@keyframes chip-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.categories { transition: opacity .12s ease; }
+.filter-bar:not(.open) .chip {
+  opacity: 0;
+  transform: translateX(-16px);
+  animation: none;
+  pointer-events: none;
+}
+
 /* =========================
    VERTICAL FEED
 ========================= */
@@ -627,6 +751,44 @@ body {
   padding-right: 8px;
   padding-bottom: 40px;
 }
+
+/*<-Loading->*/
+.karya-image {
+  position: relative;
+  background-color: #cbd6e5; 
+  overflow: hidden;
+}
+
+.shimmer-effect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.karya-image img {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  position: relative;
+  z-index: 2; /
+}
+
+.karya-image img.is-loaded {
+  opacity: 1;
+}
+
 
 /* =========================
    CARD
@@ -721,7 +883,7 @@ body {
 .struktur-top {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 14px;
 }
  
@@ -741,6 +903,9 @@ body {
   background: var(--card);
   box-shadow: 0 4px 16px rgba(0,0,0,.3);
   transition: transform .18s, box-shadow .18s, border-color .18s;
+  position: relative;
+  overflow: hidden; 
+  cursor: pointer;
 }
  
 .person:hover {
@@ -779,7 +944,54 @@ body {
   color: var(--muted);
   font-size: .8rem;
 }
+
+ .person-ig-overlay {
+  position: absolute;
+  inset: 0; 
+  background: rgba(10, 15, 30, 0.85); 
+  backdrop-filter: blur(4px);
+  gap: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
  
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+
+.ig-btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  
+ 
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  
+
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+.person:hover .person-ig-overlay,
+.person:focus .person-ig-overlay,
+.person:focus-within .person-ig-overlay {
+  opacity: 1;
+  pointer-events: auto; 
+}
+
+
+.person:hover .ig-btn,
+.person:focus .ig-btn,
+.person:focus-within .ig-btn {
+  transform: translateY(0);
+}
 /* ============================================
    GALERI
    ============================================ */
@@ -821,6 +1033,35 @@ body {
   background: #d7e1f3;
 }
  
+@media (min-width: 601px) {
+  .galeri-swipe {
+    /* Atur batas tingginya di sini. 
+       Kira-kira 850px itu pas buat nampilin 3 baris (9 kartu) */
+    max-height: 850px; 
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Kasih jarak dikit di kanan biar scrollbar gak nabrak foto */
+    padding-right: 14px; 
+  }
+
+  /* (Opsional) Bikin scrollbar-nya jadi lebih tipis dan estetik khas DKV */
+  .galeri-swipe::-webkit-scrollbar {
+    width: 6px;
+  }
+  .galeri-swipe::-webkit-scrollbar-track {
+    background: rgba(10, 15, 30, 0.05);
+    border-radius: 10px;
+  }
+  .galeri-swipe::-webkit-scrollbar-thumb {
+    background: rgba(10, 15, 30, 0.25);
+    border-radius: 10px;
+  }
+  .galeri-swipe::-webkit-scrollbar-thumb:hover {
+    background: rgba(10, 15, 30, 0.45);
+  }
+}
+
 /* ============================================
    FOOTER
    ============================================ */
@@ -2333,4 +2574,11 @@ body {
   transform: translateY(-2px);
   background: rgba(2, 7, 56, 0.14);
   box-shadow: 0 8px 22px rgba(2, 7, 56, 0.08);
+}
+
+@media (max-width: 768px) {
+  .categories {
+    gap: 9px;
+    padding-right: 38px;
+  }
 }
