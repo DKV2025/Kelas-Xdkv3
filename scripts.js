@@ -524,18 +524,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     return data || [];
   }
 
-  // Simpan semua karya di memori biar filternya ngebut (gak perlu fetch DB terus)
+  
   let allApprovedPosts = [];
 
   async function renderApprovedPosts(categoryFilter = 'Semua') {
-    // Kalo array masih kosong, ambil dari Supabase
+    
     if (allApprovedPosts.length === 0) {
       allApprovedPosts = await getApprovedPosts();
     }
 
     karyaScroll.innerHTML = '';
 
-    // Nyaring postingan sesuai kategori yang dipilih
+    
     const filteredPosts = categoryFilter === 'Semua' 
       ? allApprovedPosts 
       : allApprovedPosts.filter(post => post.category === categoryFilter);
@@ -600,6 +600,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <a href="chat.html?userId=${post.user_id}&postId=${postId}" class="post-chat-btn" title="Chat" aria-label="Chat">
                   💬
                 </a>
+                <button type="button" class="post-share-btn" data-post-id="${postId}" aria-label="Share Karya">
+                  ➤
+                </button>
+              </div>
               </div>
             </div>
           </div>
@@ -608,41 +612,106 @@ document.addEventListener('DOMContentLoaded', async () => {
       karyaScroll.appendChild(card);
     });
 
-    // Panggil ulang event tombol like karena HTML-nya baru ke-render
+ 
     await setupLikeButtons();
   }
 
-  // ============================================
-  // LOGIC ANIMASI & KLIK FILTER
-  // ============================================
+  
   const bar = document.getElementById('filterBar');
   const toggle = document.getElementById('filterToggle');
   const chips = document.querySelectorAll('.chip');
 
   if (toggle && bar) {
-    // Buka-tutup filter bar
+   
     toggle.addEventListener('click', () => {
       const isOpen = bar.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Pas chip kategori diklik
+   
     chips.forEach(chip => {
       chip.addEventListener('click', async () => {
-        // Copot class selected dari semua chip
+       
         chips.forEach(c => c.classList.remove('selected'));
-        // Pasang class selected ke chip yang diklik
+        
         chip.classList.add('selected');
         
         const selectedCategory = chip.getAttribute('data-cat');
         
-        // Render karya berdasarkan kategori
+      
         await renderApprovedPosts(selectedCategory);
       });
     });
   }
 
-  // Render semua karya saat web pertama kali dibuka
+  
   await renderApprovedPosts('Semua');
+ // ============================================
+  // LOGIC SHARE & AUTO-SCROLL KE KARYA
+  // ============================================
+
+  // 1. NATIVE SHARE (Pop-up WA, IG, dll)
+  if (karyaScroll) {
+    karyaScroll.addEventListener('click', async (e) => {
+      const shareBtn = e.target.closest('.post-share-btn');
+      if (shareBtn) {
+        const postId = shareBtn.dataset.postId;
+        const shareUrl = `https://dkv-share.vercel.app/api?post=${postId}`;
+        
+        // Cek apakah HP/Browser support fitur Share bawaan
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Karya Keren XI DKV 3',
+              text: 'Cek karya ini di Galeri Portofolio XI DKV 3!',
+              url: shareUrl
+            });
+            
+          } catch (err) {
+            console.log('Share dibatalkan atau gagal:', err);
+          }
+        } else {
+         
+          try {
+            await navigator.clipboard.writeText(shareUrl);
+            alert('Link karya berhasil dicopy! Tinggal paste di WA/IG.');
+          } catch (err) {
+            console.error('Gagal copy link otomatis:', err);
+            prompt('Copy link ini manual ya:', shareUrl);
+          }
+        }
+      }
+    });
+  }
+
+  // 2. FUNGSI AUTO-SCROLL
+  async function checkSharedPost() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetPostId = urlParams.get('post');
+
+    if (targetPostId) {
+      
+      const targetElement = document.querySelector(`.post-share-btn[data-post-id="${targetPostId}"]`);
+      
+      if (targetElement) {
+        const card = targetElement.closest('.karya-card');
+        if (card) {
+          setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            card.style.transition = 'box-shadow 0.4s ease';
+            card.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.6)';
+            
+            setTimeout(() => {
+              card.style.boxShadow = '';
+            }, 3000);
+          }, 800);
+        }
+      }
+    }
+  }
+
+  
+  checkSharedPost();
   await setupLikeButtons();
 });
