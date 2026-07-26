@@ -569,10 +569,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="kategori">${category}</span>
         
         <div class="karya-image ${imageClass}">
-          <!-- 1. Kita selipin div cahaya di sini -->
+          
           <div class="shimmer-effect"></div>
           
-          <!-- 2. Tambahin atribut onload di tag img ini -->
+          
           <img 
             src="${imageUrl}" 
             alt="Karya dari ${username}" 
@@ -663,7 +663,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           try {
             await navigator.share({
               title: 'Website XI DKV 2025',
-              text: 'Cek karya ini di Galeri Portofolio XI DKV 2025',
+              text: 'Cek karya ini di portofolio XI DKV 2025',
               url: shareUrl
             });
             
@@ -674,7 +674,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          
           try {
             await navigator.clipboard.writeText(shareUrl);
-            alert('Link karya berhasil dicopy! Tinggal paste di WA/IG.');
+            alert('Link karya berhasil dicopy!');
           } catch (err) {
             console.error('Gagal copy link otomatis:', err);
             prompt('Copy link ini manual ya:', shareUrl);
