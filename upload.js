@@ -205,7 +205,7 @@ if (postPreviewImage) {
   }
 
 
-  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+  const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
 async function getSupabaseUser() {
   const { data, error } = await supabaseClient.auth.getUser();
@@ -273,7 +273,7 @@ function makeSafeFileName(fileName) {
     const supabaseUser = await getSupabaseUser();
 
     if (!supabaseUser) {
-      alert('Kamu harus login dulu sebelum upload karya.');
+      alert('Kamu harus login sebelum upload karya.');
       window.location.href = 'login.html';
       return;
     }
@@ -326,7 +326,7 @@ function makeSafeFileName(fileName) {
 
     if (selectedFile.size > MAX_FILE_SIZE) {
       const wantCompress = confirm(
-        'Gambar terlalu besar. Ukuran maksimal 2MB. Kompres otomatis agar bisa diupload?'
+        'Gambar terlalu besar. Ukuran maksimal 1MB. Kompres otomatis agar bisa diupload?'
       );
 
       if (!wantCompress) {
@@ -337,7 +337,7 @@ function makeSafeFileName(fileName) {
         const compressedBlob = await compressImageToJpeg(selectedFile);
 
         if (compressedBlob.size > MAX_FILE_SIZE) {
-          alert('Gambar masih lebih dari 2MB setelah dikompres. Coba pakai gambar yang lebih kecil, atau convert menjadi .webp');
+          alert('Gambar masih lebih dari 1MB setelah dikompres. Coba pakai gambar yang lebih kecil, atau convert menjadi .webp');
           return;
         }
 
