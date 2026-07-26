@@ -1088,6 +1088,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 260px;
   background: rgba(149, 184, 190, 0.8);
   border-radius: 999px;
   padding: 6px 16px 6px 8px;
@@ -1104,15 +1105,34 @@ body {
 .ig-link:hover { opacity: .75; }
  
 .ig-icon {
-  width: 52px;
-  height: 52px;
+  width: 85px;
+  height: 85px;
   object-fit: contain;
+}
+
+.ig-container {
+  display: flex;
+  align-items: center; 
+  gap: 8px;
 }
  
 .ig-handle {
   color: var(--muted);
   font-size: .88rem;
   font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ig-handles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; 
+  text-align: left;
+}
+
+.ig-handle:hover {
+  color: #8167bd; 
 }
  
 .footer-address {
@@ -1288,7 +1308,6 @@ body {
   padding: 11px 18px;
 
   border-radius: 999px;
-  background: rgba(230, 236, 255, 0.8);
   color: #020738;
 
   text-decoration: none;
@@ -1299,6 +1318,15 @@ body {
     transform .2s ease,
     background .2s ease,
     box-shadow .2s ease;
+}
+
+.ling {
+  color: #020738;
+  text-decoration: underline;
+}
+.ling:hover {
+  color: #47509b;
+  transform: translateY(1.05);
 }
 
 .join-link:hover {
