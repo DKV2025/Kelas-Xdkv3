@@ -1,6 +1,4 @@
-/* ============================================
-   RESET & BASE
-   ============================================ */
+
 *, *::before, *::after { box-sizing: border-box; }
  
 img { display: block; max-width: 100%; height: auto; }
@@ -16,20 +14,18 @@ html {
   scroll-padding-top: 64px;
 }
  
-/* ============================================
-   DESIGN TOKENS
-   ============================================ */
+
 :root {
-  /* Palet baru: biru-hitam-putih */
-  --bg:       #e6ecff;       /* background utama — navy sangat gelap */
-  --bg-2:     #aec4cc;       /* sedikit lebih terang */
-  --card:     #c5cbe0;       /* kartu/panel */
-  --line:     rgba(255, 255, 255, 0.09);
-  --accent:   #3b82f6;       /* biru cerah — aksen utama */
-  --accent-2: #1d4ed8;       /* biru lebih dalam */
  
-  --text:     #000000;       /* putih sedikit kebiruan */
-  --muted:    #222933;       /* abu-biru untuk teks sekunder */
+  --bg:       #e6ecff;       
+  --bg-2:     #aec4cc;       
+  --card:     #c5cbe0;      
+  --line:     rgba(255, 255, 255, 0.09);
+  --accent:   #3b82f6;     
+  --accent-2: #1d4ed8;       
+ 
+  --text:     #000000;       
+  --muted:    #222933;       
   --tk:       #dfeff5;
  
   --font-body:    "DM Sans",  system-ui, sans-serif;
@@ -56,19 +52,14 @@ body {
   background: var(--bg);
 }
  
-/* ============================================
-   CONTAINER
-   ============================================ */
 .container {
   width: min(100% - 2rem, var(--container));
   margin-inline: auto;
 }
  
-/* ============================================
-   HEADER
-   ============================================ */
+
 .site-header {
-  position: relative; /* Balikin ke relative biar gak ngelindes konten bawahnya */
+  position: relative; 
   z-index: 50;
   width: 100%;
   background: rgba(10, 15, 30, 0.82);
@@ -89,7 +80,7 @@ body {
   to { transform: translateY(0); }
 }
 
-/* Animasi biar navbarnya turun smooth dari atas layar */
+
 @keyframes slideDown {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
@@ -201,7 +192,7 @@ body {
   overflow: hidden;
 }
  
-/* ── Slideshow wrapper ── */
+
 .slideshow {
   position: relative;
   width: 100%;
@@ -210,7 +201,7 @@ body {
   background: #e3e9f8;
 }
  
-/* ── Track (semua slide berjajar vertikal) ── */
+
 .slides-track {
   display: flex;
   align-items: center;
@@ -222,7 +213,7 @@ body {
   will-change: transform;
 }
  
-/* ── Satu slide ── */
+
 .slide {
   flex: 0 0 80%;
   height: 100%;
@@ -250,7 +241,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  /* efek redup supaya kontrol terlihat */
+  
    border-radius: 18px;
   border: 5px solid rgb(104, 108, 145);
 
@@ -260,7 +251,7 @@ body {
   filter: brightness(.88);
 }
  
-/* ── Tombol skip kiri/kanan ── */
+
 .slide-controls {
   position: absolute;
   bottom: 18px;
@@ -296,7 +287,7 @@ body {
   transform: scale(.95);
 }
  
-/* ── Brand bar: logo + tagline di bawah slideshow ── */
+
 .hero-brand-bar {
   background: var(--bg-2);
   border-bottom: 1px solid var(--line);
@@ -326,9 +317,7 @@ body {
   color: var(--text);
 }
  
-/* ============================================
-   SECTIONS — shared
-   ============================================ */
+
 .section {
   padding: 40px 0;
   border-bottom: 1px solid var(--line);
@@ -437,9 +426,35 @@ body {
   opacity: .6;
   cursor: wait;
 }
-/* ============================================
-   TENTANG
-   ============================================ */
+
+.post-share-btn {
+  width: 34px;
+  height: 34px;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  border: none;
+  border-radius: 50%;
+  
+  background: rgba(9, 7, 31, 0.08);
+  color: #09071f;
+  
+  cursor: pointer;
+  font-size: 0.95rem;
+  
+  transition: transform .2s ease, background .2s ease;
+}
+
+.post-share-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(9, 7, 31, 0.16);
+}
+
+
+
 .tentang-grid {
   display: grid;
   grid-template-columns: 1.3fr .7fr;
@@ -501,9 +516,8 @@ body {
   object-fit: contain;
 }
  
-/* ============================================
-   KARYA SISWA
-============================================ */
+
+
 
 .karya-showcase {
   width: 100%;
@@ -630,7 +644,6 @@ body {
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.14);
 }
 
-/*<--Filter bar-->*/
 .filter-bar {
   display: flex;
   align-items: center;
@@ -732,9 +745,6 @@ body {
   pointer-events: none;
 }
 
-/* =========================
-   VERTICAL FEED
-========================= */
 
 .karya-scroll {
   width: 100%;
@@ -790,9 +800,8 @@ body {
 }
 
 
-/* =========================
-   CARD
-========================= */
+
+
 
 .karya-card {
   width: min(100%, 720px);
@@ -865,9 +874,7 @@ body {
 }
 
 
-/* ============================================
-   CARA BERKARYA
-   ============================================ */
+
 .clean-points {
   margin: 0;
   padding-left: 1.1rem;
@@ -877,9 +884,10 @@ body {
   font-size: var(--sm);
 }
  
-/* ============================================
-   STRUKTUR
-   ============================================ */
+
+
+
+
 .struktur-top {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -992,9 +1000,11 @@ body {
 .person:focus-within .ig-btn {
   transform: translateY(0);
 }
-/* ============================================
-   GALERI
-   ============================================ */
+
+
+
+
+
 .galeri-swipe {
   overflow: visible;
 }
@@ -1034,18 +1044,12 @@ body {
 }
  
 @media (min-width: 601px) {
-  .galeri-swipe {
-    /* Atur batas tingginya di sini. 
-       Kira-kira 850px itu pas buat nampilin 3 baris (9 kartu) */
+  .galeri-swipe {  
     max-height: 850px; 
     overflow-y: auto;
     overflow-x: hidden;
-    
-    /* Kasih jarak dikit di kanan biar scrollbar gak nabrak foto */
     padding-right: 14px; 
   }
-
-  /* (Opsional) Bikin scrollbar-nya jadi lebih tipis dan estetik khas DKV */
   .galeri-swipe::-webkit-scrollbar {
     width: 6px;
   }
@@ -1062,9 +1066,11 @@ body {
   }
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
+
+
+
+
+
 .site-footer {
   padding: 36px 0 48px;
   background: var(--bg-2);
@@ -1138,9 +1144,9 @@ body {
 .credit-name   { margin: 0; font-size: .85rem; font-weight: 700; }
 .credit-sub    { margin: 0; font-size: .75rem; color: var(--muted); }
  
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+
+
+
 @media (max-width: 860px) {
   .tentang-grid        { grid-template-columns: 1fr; }
   .struktur-top        { grid-template-columns: 1fr; }
@@ -1153,7 +1159,7 @@ body {
   .grid-galeri         { grid-template-columns: 1fr; }
   .hero-brand-inner    { gap: 14px; }
  
-  /* Mobile: galeri jadi carousel swipe */
+
   .galeri-swipe {
     overflow-x: auto;
     overflow-y: hidden;
@@ -1184,13 +1190,13 @@ body {
   .hero-title   { font-size: 1.6rem; }
 }
  
-/* ============================================
-   FOCUS / ACCESSIBILITY
-   ============================================ */
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+
 
 /* ====================================
    Mobile Version!!!
@@ -1319,7 +1325,7 @@ body {
   outline: 2px solid rgba(9, 7, 31, .25);
 }
 
-/*-tambahan lier*/
+
 .preview-image-placeholder {
   position: relative;
 
@@ -1337,12 +1343,12 @@ body {
   overflow: hidden;
 }
 
-/* Default saat gambar sudah ada */
+
 .preview-image-placeholder.has-image {
   background: transparent;
 }
 
-/* Mode 1:1 square */
+
 .preview-image-placeholder.has-image.aspect-square {
   height: auto;
   aspect-ratio: 1 / 1;
@@ -1356,7 +1362,7 @@ body {
   border-radius: 18px;
 }
 
-/* Mode original ratio */
+
 .preview-image-placeholder.has-image.aspect-original {
   height: auto;
   min-height: 0;
@@ -1421,7 +1427,7 @@ body {
   position: relative;
   z-index: 1;
 }
-/*sampe die /\*/
+
 
 .preview-image-placeholder.has-image {
   background: transparent;
@@ -1464,9 +1470,10 @@ body {
   transform: none;
 }
 
-/* ============================================
-   UPLOAD PAGE
-============================================ */
+
+
+
+
 .upload-back-btn {
     display: flex;
   justify-content: center;
@@ -1776,7 +1783,7 @@ body {
   font-weight: 600;
 }
 
-/* Description */
+
 
 .description-field {
   width: min(100%, 1080px);
@@ -1813,7 +1820,7 @@ body {
 }
 
 
-/* Preview postingan */
+
 
 .upload-post-preview {
   width: min(100%, 720px);
@@ -1912,9 +1919,7 @@ body {
   font-size: 1.05rem;
 }
 
-/* ============================================
-   LOGIN TOAST
-============================================ */
+
 
 .login-toast {
   position: fixed;
@@ -2277,7 +2282,7 @@ body {
   }
 }
 
-/* Mobile fix */
+
 @media (max-width: 768px) {
   .slideshow {
     height: min(72vh, 460px);
@@ -2332,8 +2337,7 @@ body {
   }
 }
 
-/* Gradient + */
-/* HERO BRAND BAR GRADIENT */
+
 .hero-brand-bar {
   position: relative;
   overflow: hidden;
