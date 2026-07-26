@@ -674,7 +674,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          
           try {
             await navigator.clipboard.writeText(shareUrl);
-            alert('Link karya berhasil dicopy!');
+            alert('Link karya berhasil dicopy! Tinggal paste di WA/IG.');
           } catch (err) {
             console.error('Gagal copy link otomatis:', err);
             prompt('Copy link ini manual ya:', shareUrl);
