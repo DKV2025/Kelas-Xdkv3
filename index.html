@@ -27,9 +27,9 @@
       <nav class="nav" aria-label="Navigasi utama">
         <a href="#hero">Home</a>
         <a href="#tentang">Tentang</a>
-        <a href="#cara">Cara</a>
-        <a href="#struktur">Struktur</a>
         <a href="#karya">Karya</a>
+        <a href="#struktur">Struktur</a>
+        <a href="#galeri">Galeri</a>
       </nav>
         <div class="nav-auth" id="navAuth"></div>
     </div>
@@ -38,34 +38,31 @@
   <main>
 
     <!-- ═══════════════════════════════════════
-         2. HERO — Slideshow karya + logo bawah
+         2. HERO — Slideshow karya
     ═══════════════════════════════════════ -->
     <section class="hero" id="hero" aria-label="Hero slideshow karya">
 
-      <!-- Slideshow area -->
+   
       <div class="slideshow" aria-live="polite">
         <div class="slides-track" id="slidesTrack">
           <div class="slide"><img src="images/karya-06.jpg" alt="Karya 1" loading="lazy"/></div>
           <div class="slide"><img src="images/karya-02.jpg" alt="Karya 2" loading="lazy"/></div>
-          <div class="slide"><img src="images/karya-03.jpg" alt="Karya 3" loading="lazy"/></div>
-          <div class="slide"><img src="images/karya-04.jpg" alt="Karya 4" loading="lazy"/></div>
-          <div class="slide"><img src="images/karya-05.jpg" alt="Karya 5" loading="lazy"/></div>
-          <div class="slide"><img src="images/karya-01.jpg" alt="Karya 6" loading="lazy"/></div>
+          <div class="slide"><img src="images/karya-04.jpg" alt="Karya 3" loading="lazy"/></div>
+          <div class="slide"><img src="images/karya-01.jpg" alt="Karya 4" loading="lazy"/></div>
         
 
-          <!-- duplikat untuk infinite loop -->
+       
           <div class="slide" aria-hidden="true"><img src="images/karya-06.jpg" alt="" /></div>
           <div class="slide" aria-hidden="true"><img src="images/karya-02.jpg" alt="" /></div>
         </div>
 
-        <!-- Tombol skip -->
+     
         <div class="slide-controls">
           <button class="slide-btn" id="slidePrev" aria-label="Sebelumnya">&#8592;</button>
           <button class="slide-btn" id="slideNext" aria-label="Berikutnya">&#8594;</button>
         </div>
       </div>
 
-      <!-- Logo + tagline di bawah slideshow -->
       <div class="hero-brand-bar">
         <div class="container hero-brand-inner">
           <img class="hero-logo" src="images/logo-kelas.png" alt="Logo Kelas XI DKV 3" />
@@ -78,9 +75,7 @@
     </section>
 
 
-    <!-- ═══════════════════════════════════════
-         3. TENTANG KELAS DKV
-    ═══════════════════════════════════════ -->
+    
     <section class="section" id="tentang" aria-labelledby="tentang-title">
       <div class="container">
         <h2 id="tentang-title" class="section-title">Tentang website</h2>
@@ -189,7 +184,7 @@
   </div>
 </section>
 
-<!-- 5. Cara Kami Berkarya -->
+
     <section class="section" id="cara" aria-labelledby="cara-title">
       <div class="container">
         <h2 id="cara-title" class="section-title">Cara kami berkarya</h2>
@@ -203,9 +198,7 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════
-         5. STRUKTUR DKV 2025
-    ═══════════════════════════════════════ -->
+   
     <section class="section" id="struktur" aria-labelledby="struktur-title">
       <div class="container">
         <h2 id="struktur-title" class="section-title">Pengurus XI DKV</h2>
@@ -282,28 +275,27 @@
     <div class="container footer-inner">
 
       <div class="footer-social" aria-label="Sosial media">
-        <a class="ig-link" href="https://www.instagram.com/europhia.sketsaa/"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="Buka Instagram @europhia.sketsaa">
-          <img class="ig-icon" src="images/instagram.webp" alt="" aria-hidden="true" />
-          <span class="ig-handle">@europhia.sketsaa</span>
-        </a>
-      </div>
+  <div class="ig-container">
+    <img class="ig-icon" src="images/instagram.webp" alt="Instagram" aria-hidden="true" />
+    
+    <div class="ig-handles">
+      <a class="ig-handle" href="https://www.instagram.com/europhia.sketsaa/" target="_blank" rel="noopener noreferrer">@europhia.sketsaa</a>
+      <a class="ig-handle" href="https://www.instagram.com/xi.dkv2__sketsa/" target="_blank" rel="noopener noreferrer">@xi.dkv2_sketsa</a>
+      <a class="ig-handle" href="https://www.instagram.com/dekapione.aud/" target="_blank" rel="noopener noreferrer">@dekapione.aud</a>
+    </div>
+  </div>
+</div>
+      
 
       <p class="footer-address">
         <span class="muted">JL.Mancogeh no26, Kec.Cipedes, Kota Tasikmalaya, Jawa Barat.</span>
       </p>
 
       <div class="footer-join">
-  <h3>Join Us?</h3>
   <p>
     Creative project portofolio digital DKV. <p>
     <p>Open for collaboration, portfolio showcase, and creative projects.
   </p>
-
-  <a href="https://www.instagram.com/Ahdanrizkiya" target="_blank" class="join-link">
-    Contact @Ahdanrizkiya
-  </a>
 </div>
 
       <div class="creator-credit">
@@ -313,7 +305,7 @@
     <img src="images/pembuat.webp" alt="Creator profile" class="credit-avatar">
 
     <div class="credit-text">
-      <h4>Akhdan</h4>
+      <h4 href="https://www.instagram.com/Ahdanrizkiya" target="_blank" class="ling">Akhdan</h4>
       <p>Creating somethings that feel alive.</p>
     </div>
   </div>
