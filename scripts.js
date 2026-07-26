@@ -503,55 +503,70 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  async function getApprovedPosts() {
-    const { data, error } = await supabaseClient
-      .from('posts')
-      .select(`
-        *,
-        profiles (
-          username,
-          avatar_url
-        )
-      `)
-      .eq('status', 'approved')
-      .order('approved_at', { ascending: false });
-
-    if (error) {
-      console.error('Gagal mengambil approved posts:', error);
-      return [];
-    }
-
-    return data || [];
-  }
+  // ============================================
+  // INFINITE SCROLL & RENDER POSTS
+  // ============================================
+  let currentCategory = 'Semua';
+  let currentPage = 0;
+  const POSTS_PER_PAGE = 5; 
+  let hasMorePosts = true;
+  let isFetching = false; 
 
   
-  let allApprovedPosts = [];
+  const scrollTrigger = document.createElement('div');
+  scrollTrigger.id = 'scroll-trigger';
+  scrollTrigger.style.height = '1px'; 
+  karyaScroll.parentNode.insertBefore(scrollTrigger, karyaScroll.nextSibling);
 
-  async function renderApprovedPosts(categoryFilter = 'Semua') {
+  
+  async function fetchAndRenderPosts(isReset = false) {
+    if (isFetching) return; 
     
-    if (allApprovedPosts.length === 0) {
-      allApprovedPosts = await getApprovedPosts();
+    if (isReset) {
+      currentPage = 0;
+      karyaScroll.innerHTML = '';
+      hasMorePosts = true;
     }
 
-    karyaScroll.innerHTML = '';
+    if (!hasMorePosts) return; 
 
-    
-    const filteredPosts = categoryFilter === 'Semua' 
-      ? allApprovedPosts 
-      : allApprovedPosts.filter(post => post.category === categoryFilter);
+    isFetching = true;
 
-    if (filteredPosts.length === 0) {
-      karyaScroll.innerHTML = `
-        <div class="empty-karya" style="text-align:center; padding: 40px;">
-          <h3>Belum ada karya di kategori ini.</h3>
-          <p>Karya akan muncul setelah admin approve postingan.</p>
-        </div>
-      `;
+    // Panggil Supabase
+    let query = supabaseClient
+      .from('posts')
+      .select('*, profiles (username, avatar_url)', { count: 'exact' })
+      .eq('status', 'approved');
+
+    if (currentCategory !== 'Semua') {
+      query = query.eq('category', currentCategory);
+    }
+
+    // Set batas 9 gambar
+    const from = currentPage * POSTS_PER_PAGE;
+    const to = from + POSTS_PER_PAGE - 1;
+    query = query.range(from, to).order('approved_at', { ascending: false });
+
+    const { data, count, error } = await query;
+
+    if (error) {
+      console.error('Gagal mengambil posts:', error);
+      isFetching = false;
       return;
     }
 
-    
-    filteredPosts.forEach((post) => {
+    if (isReset && (!data || data.length === 0)) {
+      karyaScroll.innerHTML = `
+        <div class="empty-karya" style="text-align:center; padding: 40px; width: 100%;">
+          <h3>Belum ada karya di kategori ini.</h3>
+        </div>
+      `;
+      isFetching = false;
+      return;
+    }
+
+  
+    data.forEach((post) => {
       const card = document.createElement('article');
       card.className = 'karya-card';
 
@@ -567,12 +582,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       card.innerHTML = `
         <span class="kategori">${category}</span>
-        
         <div class="karya-image ${imageClass}">
-          
           <div class="shimmer-effect"></div>
-          
-          
           <img 
             src="${imageUrl}" 
             alt="Karya dari ${username}" 
@@ -580,7 +591,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
           >
         </div>
-        
         <div class="creator">
           <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
             <img class="creator-pp" src="${avatar}" alt="Profile">
@@ -604,7 +614,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                   ➤
                 </button>
               </div>
-              </div>
             </div>
           </div>
         </div>
@@ -612,9 +621,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       karyaScroll.appendChild(card);
     });
 
- 
     await setupLikeButtons();
+
+    
+    if (to >= count - 1 || data.length < POSTS_PER_PAGE) {
+      hasMorePosts = false;
+    }
+
+    currentPage++;
+    isFetching = false;
   }
+
+  
+  const observer = new IntersectionObserver((entries) => {
+   
+    if (entries[0].isIntersecting && hasMorePosts && !isFetching) {
+      fetchAndRenderPosts(false);
+    }
+  }, { rootMargin: '200px' });
+
+  observer.observe(scrollTrigger);
 
   
   const bar = document.getElementById('filterBar');
@@ -622,30 +648,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   const chips = document.querySelectorAll('.chip');
 
   if (toggle && bar) {
-   
     toggle.addEventListener('click', () => {
       const isOpen = bar.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-   
     chips.forEach(chip => {
       chip.addEventListener('click', async () => {
-       
         chips.forEach(c => c.classList.remove('selected'));
-        
         chip.classList.add('selected');
         
-        const selectedCategory = chip.getAttribute('data-cat');
-        
-      
-        await renderApprovedPosts(selectedCategory);
+        currentCategory = chip.getAttribute('data-cat');
+        await fetchAndRenderPosts(true);
       });
     });
   }
 
-  
-  await renderApprovedPosts('Semua');
+
+  await fetchAndRenderPosts(true);
  // ============================================
   // LOGIC SHARE & AUTO-SCROLL KE KARYA
   // ============================================
