@@ -564,7 +564,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 💬
               </a>
               <button type="button" class="post-share-btn" data-post-id="${postId}" aria-label="Share Karya">
-                ➤
+                🔗
               </button>
             </div>
           </div>
@@ -671,6 +671,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           card.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.6)';
           setTimeout(() => { card.style.boxShadow = ''; }, 3000);
         }, 800);
+
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+        
       } else {
         
         sharedPostIdToSkip = null; 
