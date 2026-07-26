@@ -564,7 +564,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 💬
               </a>
               <button type="button" class="post-share-btn" data-post-id="${postId}" aria-label="Share Karya">
-                🔗
+                ➤
               </button>
             </div>
           </div>
