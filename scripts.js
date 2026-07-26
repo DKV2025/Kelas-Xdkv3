@@ -504,35 +504,92 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // ============================================
-  // INFINITE SCROLL & RENDER POSTS
+  // INFINITE SCROLL & RENDER POSTS (UPDATE VIP SHARE)
   // ============================================
   let currentCategory = 'Semua';
   let currentPage = 0;
-  const POSTS_PER_PAGE = 8; 
+  const POSTS_PER_PAGE = 9;
   let hasMorePosts = true;
-  let isFetching = false; 
+  let isFetching = false;
+  let sharedPostIdToSkip = null;
 
   
   const scrollTrigger = document.createElement('div');
   scrollTrigger.id = 'scroll-trigger';
-  scrollTrigger.style.height = '1px'; 
+  scrollTrigger.style.height = '1px';
   karyaScroll.parentNode.insertBefore(scrollTrigger, karyaScroll.nextSibling);
 
-  
+  function createKaryaCard(post) {
+    const card = document.createElement('article');
+    card.className = 'karya-card';
+
+    const username = escapeHTML(post.profiles?.username || 'User');
+    const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
+    const category = escapeHTML(post.category);
+    const postType = escapeHTML(post.post_type);
+    const description = escapeHTML(post.description || '');
+    const imageUrl = escapeHTML(post.image_url);
+    const postId = escapeHTML(post.id);
+
+    const imageClass = post.aspect_mode === 'original' ? 'aspect-original' : 'aspect-square';
+
+    card.innerHTML = `
+      <span class="kategori">${category}</span>
+      <div class="karya-image ${imageClass}">
+        <div class="shimmer-effect"></div>
+        <img 
+          src="${imageUrl}" 
+          alt="Karya dari ${username}" 
+          loading="lazy"
+          onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
+        >
+      </div>
+      <div class="creator">
+        <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
+          <img class="creator-pp" src="${avatar}" alt="Profile">
+        </a>
+        <div class="creator-info">
+          <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
+            <h4>${username}</h4>
+          </a>
+          <span class="post-type-label">${postType}</span>
+          <p>${description}</p>
+          <div class="post-bottom-row">
+            <span class="tanggal">${formatDate(post.approved_at || post.created_at)}</span>
+            <div class="post-actions">
+              <button type="button" class="post-like-btn" data-post-id="${postId}" aria-label="Like">
+                ♡ <span class="like-count" data-like-count="${postId}">0</span>
+              </button>
+              <a href="chat.html?userId=${post.user_id}&postId=${postId}" class="post-chat-btn" title="Chat" aria-label="Chat">
+                💬
+              </a>
+              <button type="button" class="post-share-btn" data-post-id="${postId}" aria-label="Share Karya">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
+ 
   async function fetchAndRenderPosts(isReset = false) {
-    if (isFetching) return; 
+    if (isFetching) return;
     
     if (isReset) {
       currentPage = 0;
-      karyaScroll.innerHTML = '';
+      
+      if (!sharedPostIdToSkip) {
+        karyaScroll.innerHTML = '';
+      }
       hasMorePosts = true;
     }
 
-    if (!hasMorePosts) return; 
-
+    if (!hasMorePosts) return;
     isFetching = true;
 
-    // Panggil Supabase
     let query = supabaseClient
       .from('posts')
       .select('*, profiles (username, avatar_url)', { count: 'exact' })
@@ -542,7 +599,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       query = query.eq('category', currentCategory);
     }
 
-    // Set batas 9 gambar
+    
+    if (sharedPostIdToSkip) {
+      query = query.neq('id', sharedPostIdToSkip);
+    }
+
     const from = currentPage * POSTS_PER_PAGE;
     const to = from + POSTS_PER_PAGE - 1;
     query = query.range(from, to).order('approved_at', { ascending: false });
@@ -555,7 +616,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    if (isReset && (!data || data.length === 0)) {
+    if (isReset && (!data || data.length === 0) && !sharedPostIdToSkip) {
       karyaScroll.innerHTML = `
         <div class="empty-karya" style="text-align:center; padding: 40px; width: 100%;">
           <h3>Belum ada karya di kategori ini.</h3>
@@ -567,63 +628,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   
     data.forEach((post) => {
-      const card = document.createElement('article');
-      card.className = 'karya-card';
-
-      const username = escapeHTML(post.profiles?.username || 'User');
-      const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
-      const category = escapeHTML(post.category);
-      const postType = escapeHTML(post.post_type);
-      const description = escapeHTML(post.description || '');
-      const imageUrl = escapeHTML(post.image_url);
-      const postId = escapeHTML(post.id);
-
-      const imageClass = post.aspect_mode === 'original' ? 'aspect-original' : 'aspect-square';
-
-      card.innerHTML = `
-        <span class="kategori">${category}</span>
-        <div class="karya-image ${imageClass}">
-          <div class="shimmer-effect"></div>
-          <img 
-            src="${imageUrl}" 
-            alt="Karya dari ${username}" 
-            loading="lazy"
-            onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
-          >
-        </div>
-        <div class="creator">
-          <a href="profile.html?userId=${post.user_id}" class="creator-avatar-link">
-            <img class="creator-pp" src="${avatar}" alt="Profile">
-          </a>
-          <div class="creator-info">
-            <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
-              <h4>${username}</h4>
-            </a>
-            <span class="post-type-label">${postType}</span>
-            <p>${description}</p>
-            <div class="post-bottom-row">
-              <span class="tanggal">${formatDate(post.approved_at || post.created_at)}</span>
-              <div class="post-actions">
-                <button type="button" class="post-like-btn" data-post-id="${postId}" aria-label="Like">
-                  ♡ <span class="like-count" data-like-count="${postId}">0</span>
-                </button>
-                <a href="chat.html?userId=${post.user_id}&postId=${postId}" class="post-chat-btn" title="Chat" aria-label="Chat">
-                  💬
-                </a>
-                <button type="button" class="post-share-btn" data-post-id="${postId}" aria-label="Share Karya">
-                  ➤
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
+      const card = createKaryaCard(post);
       karyaScroll.appendChild(card);
     });
 
+   
     await setupLikeButtons();
 
-    
     if (to >= count - 1 || data.length < POSTS_PER_PAGE) {
       hasMorePosts = false;
     }
@@ -633,13 +644,49 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   
-  const observer = new IntersectionObserver((entries) => {
+  async function initGallery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetPostId = urlParams.get('post');
+
+    if (targetPostId) {
+      
+      sharedPostIdToSkip = targetPostId;
+
+      
+      const { data: sharedPost, error } = await supabaseClient
+        .from('posts')
+        .select('*, profiles (username, avatar_url)')
+        .eq('id', targetPostId)
+        .single();
+
+      if (sharedPost && !error) {
+        karyaScroll.innerHTML = '';
+        const card = createKaryaCard(sharedPost);
+        karyaScroll.appendChild(card);
+
+        
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.style.transition = 'box-shadow 0.4s ease';
+          card.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.6)';
+          setTimeout(() => { card.style.boxShadow = ''; }, 3000);
+        }, 800);
+      } else {
+        
+        sharedPostIdToSkip = null; 
+      }
+    }
+
    
+    await fetchAndRenderPosts(true);
+  }
+
+ 
+  const observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting && hasMorePosts && !isFetching) {
       fetchAndRenderPosts(false);
     }
   }, { rootMargin: '200px' });
-
   observer.observe(scrollTrigger);
 
   
@@ -659,13 +706,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         chip.classList.add('selected');
         
         currentCategory = chip.getAttribute('data-cat');
-        await fetchAndRenderPosts(true);
+        
+       
+        sharedPostIdToSkip = null; 
+        
+        await fetchAndRenderPosts(true); 
       });
     });
   }
+  initGallery();
 
-
-  await fetchAndRenderPosts(true);
  // ============================================
   // LOGIC SHARE & AUTO-SCROLL KE KARYA
   // ============================================
