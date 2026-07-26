@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ============================================
   let currentCategory = 'Semua';
   let currentPage = 0;
-  const POSTS_PER_PAGE = 5; 
+  const POSTS_PER_PAGE = 8; 
   let hasMorePosts = true;
   let isFetching = false; 
 
