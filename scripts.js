@@ -662,8 +662,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (navigator.share) {
           try {
             await navigator.share({
-              title: 'Karya Keren XI DKV 3',
-              text: 'Cek karya ini di Galeri Portofolio XI DKV 3!',
+              title: 'Website XI DKV 2025',
+              text: 'Cek karya ini di Galeri Portofolio XI DKV 2025',
               url: shareUrl
             });
             
@@ -674,7 +674,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          
           try {
             await navigator.clipboard.writeText(shareUrl);
-            alert('Link karya berhasil dicopy! Tinggal paste di WA/IG.');
+            alert('Link karya berhasil dicopy!');
           } catch (err) {
             console.error('Gagal copy link otomatis:', err);
             prompt('Copy link ini manual ya:', shareUrl);
