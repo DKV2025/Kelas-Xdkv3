@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
       const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + '/reset.html',
+         redirectTo: window.location.href.replace('forgot.html', 'reset.html'),
       });
 
       submitBtn.disabled = false;
