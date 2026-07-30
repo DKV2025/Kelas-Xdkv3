@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       `)
       .eq('status', 'approved')
       .eq('is_featured', true)
-      .order('approved_at', { ascending: false });
+      .order('approved_at', { ascending: false })
+      .limit(5); // <-- REM KE-1: Mentok 5 karya aja biar irit kuota
 
     if (error) {
       console.error('Gagal mengambil featured posts:', error);
@@ -59,10 +60,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!featuredPosts || featuredPosts.length === 0) {
       return;
     }
+    
     const hiddenClones = track.querySelectorAll('.slide[aria-hidden="true"]');
     const firstHiddenClone = hiddenClones[0] || null;
 
-    featuredPosts.forEach((post) => {
+    featuredPosts.forEach((post, index) => {
       const alreadyExists = track.querySelector(
         `.featured-slide[data-featured-id="${post.id}"]`
       );
@@ -74,18 +76,27 @@ document.addEventListener('DOMContentLoaded', async function () {
       slide.dataset.featuredId = post.id;
 
       const username = escapeHTML(post.profiles?.username || 'User');
-const category = escapeHTML(post.category);
-const description = escapeHTML(post.description || '');
-const imageUrl = escapeHTML(post.image_url);
+      const category = escapeHTML(post.category);
+      const description = escapeHTML(post.description || '');
+      const imageUrl = escapeHTML(post.image_url);
+
+      // REM KE-2: Lazy load buat slide ke-2 dan ke-3. Slide pertama langsung diload biar ga blank.
+      const lazyAttr = index === 0 ? '' : 'loading="lazy"';
 
       slide.innerHTML = `
-        <img src="${imageUrl}" alt="Featured karya ${username}">
+        <div class="shimmer-effect"></div>
+        <img 
+          src="${imageUrl}" 
+          alt="Featured karya ${username}" 
+          ${lazyAttr}
+          onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
+        >
 
-<div class="featured-slide-info">
-  <span>${category}</span>
-  <h2>${username}</h2>
-  <p>${description}</p>
-</div>
+        <div class="featured-slide-info">
+          <span>${category}</span>
+          <h2>${username}</h2>
+          <p>${description}</p>
+        </div>
       `;
 
       if (firstHiddenClone) {
@@ -335,7 +346,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     </a>
 
     <a href="profile.html" class="profile-chip">
-      <img src="${currentUser.avatar || 'images/pp-01.png'}" alt="Profile">
+      <div class="img-loading-wrapper" style="width: 34px; height: 34px; border-radius: 50%;">
+  <div class="shimmer-effect"></div>
+  <img 
+    src="${currentUser.avatar || 'images/pp-01.png'}" 
+    alt="Profile"
+    onload="this.classList.add('is-loaded'); this.previousElementSibling.style.display='none';"
+  >
+</div>
       <span>${currentUser.username}</span>
     </a>
   `;
