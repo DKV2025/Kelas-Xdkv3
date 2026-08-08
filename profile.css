@@ -501,7 +501,7 @@ body {
   justify-content: center;
 
   padding: 4px 10px;
-  margin-left: 8px; /* Jarak dari nama user */
+  margin-left: 1px; /* Jarak dari nama user */
 
   border-radius: 6px;
   background: #f4f3ff;
