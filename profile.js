@@ -144,6 +144,7 @@ if (profileChatBtn) {
     });
   }
 
+
   function renderProfileData() {
     if (profileAvatar) {
       profileAvatar.src = profileUser.avatar_url || 'images/pp-01.png';
@@ -171,6 +172,16 @@ if (profileChatBtn) {
         profileInstagram.textContent = 'Belum ada Instagram.';
         profileInstagram.href = '#';
       }
+    }
+    // Tampilkan tag kalau user yang lagi dilihat ini punya data tag
+    if (profileUser.class_tag) {
+      renderActiveTag(profileUser.class_tag);
+    }
+
+    // UI tag untuk akun sendiri
+    const tagUI = document.getElementById('tagSelectorUI');
+    if (tagUI && isOwnProfile) {
+      tagUI.style.display = 'flex';
     }
   }
 
@@ -294,11 +305,6 @@ const imagePath = escapeHTML(post.image_path || '');
       return;
     }
 
-    if (imagePath) {
-      await supabaseClient.storage
-        .from('artworks')
-        .remove([imagePath]);
-    }
 
     alert('Postingan berhasil dihapus.');
     await renderMyWorks();
@@ -449,24 +455,34 @@ if (avatarFile.size > maxAvatarSize) {
   const fileExt = avatarFile.name.split('.').pop();
   const filePath = `${authUser.id}/avatar-${Date.now()}.${fileExt}`;
 
-  const { error: uploadError } = await supabaseClient.storage
-    .from('avatars')
-    .upload(filePath, avatarFile, {
-      contentType: avatarFile.type,
-      upsert: true
-    });
+  // <--- CLOUDINARY --->
+  const formData = new FormData();
+  formData.append('file', avatarFile);
+  formData.append('upload_preset', 'dkv_unsigned');
+  formData.append('folder', 'avatars');
 
-  if (uploadError) {
-    console.error(uploadError);
-    alert('Gagal upload avatar.');
+  try {
+    const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/lzdgghdf/image/upload', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const cloudinaryData = await cloudinaryRes.json();
+    
+    if (!cloudinaryRes.ok) {
+      throw new Error(cloudinaryData.error?.message || 'Gagal upload');
+    }
+
+    //f_auto,q_auto biar gambar langsung ke-compress otomatis!
+    const urlParts = cloudinaryData.secure_url.split('/upload/');
+    avatarUrl = urlParts[0] + '/upload/f_auto,q_auto/' + urlParts[1];
+
+  } catch (err) {
+    console.error(err);
+    alert('Gagal upload avatar ke Cloudinary.');
     return;
   }
-
-  const { data: publicUrlData } = supabaseClient.storage
-    .from('avatars')
-    .getPublicUrl(filePath);
-
-  avatarUrl = publicUrlData.publicUrl;
+  // --- SELESAI UPLOAD KE CLOUDINARY ---
 }
 
       const { data: updatedProfile, error: updateError } = await supabaseClient
@@ -495,3 +511,48 @@ if (avatarFile.size > maxAvatarSize) {
     });
   }
 });
+
+function toggleTagMenu() {
+  const menu = document.getElementById('tagMenu');
+  if (menu) menu.classList.toggle('show');
+}
+
+// 2. Fungsi sakti buat update ke Supabase
+async function updateClassTag(selectedTag) {
+  try {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabaseClient
+      .from('profiles')
+      .update({ class_tag: selectedTag })
+      .eq('id', user.id);
+
+    if (error) throw error;
+
+    renderActiveTag(selectedTag);
+    document.getElementById('tagMenu').classList.remove('show');
+    
+  } catch (error) {
+    console.error('Error update tag:', error);
+    alert('Gagal memperbarui tag kelas.');
+  }
+}
+
+// 3. Fungsi buat ngerubah tombol "+ tags" jadi badge kotak
+function renderActiveTag(tagText) {
+  const btnAdd = document.querySelector('.btn-add-tag');
+  const tagDisplay = document.getElementById('currentTagDisplay');
+
+  if (tagText && btnAdd && tagDisplay) {
+    btnAdd.style.display = 'none'; // Sembunyiin tombol awal
+    tagDisplay.style.display = 'inline-flex';
+    tagDisplay.className = 'class-badge'; 
+    tagDisplay.textContent = tagText; // Cuma nampilin teks murni di dalam kotak
+    
+    // Kalau kotaknya diklik, buka lagi dropdownnya
+    tagDisplay.onclick = () => {
+      document.getElementById('tagMenu').classList.toggle('show');
+    };
+  }
+}
