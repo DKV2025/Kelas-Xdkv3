@@ -173,15 +173,27 @@ if (profileChatBtn) {
         profileInstagram.href = '#';
       }
     }
-    // Tampilkan tag kalau user yang lagi dilihat ini punya data tag
-    if (profileUser.class_tag) {
-      renderActiveTag(profileUser.class_tag);
+
+    const tagUI = document.getElementById('tagSelectorUI');
+    const btnAdd = document.querySelector('.btn-add-tag');
+
+    if (tagUI) {
+  
+      if (isOwnProfile || profileUser.class_tag) {
+        tagUI.style.display = 'flex';
+      } else {
+        tagUI.style.display = 'none';
+      }
     }
 
-    // UI tag untuk akun sendiri
-    const tagUI = document.getElementById('tagSelectorUI');
-    if (tagUI && isOwnProfile) {
-      tagUI.style.display = 'flex';
+    // Sembunyiin tombol "+ tags" buat tamu
+    if (!isOwnProfile && btnAdd) {
+      btnAdd.style.display = 'none';
+    }
+
+    // Tampilkan isi tag kalau user punya data tag
+    if (profileUser.class_tag) {
+      renderActiveTag(profileUser.class_tag, isOwnProfile);
     }
   }
 
@@ -517,7 +529,7 @@ function toggleTagMenu() {
   if (menu) menu.classList.toggle('show');
 }
 
-// 2. Fungsi sakti buat update ke Supabase
+
 async function updateClassTag(selectedTag) {
   try {
     const { data: { user } } = await supabaseClient.auth.getUser();
@@ -530,7 +542,8 @@ async function updateClassTag(selectedTag) {
 
     if (error) throw error;
 
-    renderActiveTag(selectedTag);
+   
+    renderActiveTag(selectedTag, true); 
     document.getElementById('tagMenu').classList.remove('show');
     
   } catch (error) {
@@ -539,20 +552,26 @@ async function updateClassTag(selectedTag) {
   }
 }
 
-// 3. Fungsi buat ngerubah tombol "+ tags" jadi badge kotak
-function renderActiveTag(tagText) {
+
+function renderActiveTag(tagText, isOwner) {
   const btnAdd = document.querySelector('.btn-add-tag');
   const tagDisplay = document.getElementById('currentTagDisplay');
 
   if (tagText && btnAdd && tagDisplay) {
-    btnAdd.style.display = 'none'; // Sembunyiin tombol awal
+    btnAdd.style.display = 'none';
     tagDisplay.style.display = 'inline-flex';
     tagDisplay.className = 'class-badge'; 
-    tagDisplay.textContent = tagText; // Cuma nampilin teks murni di dalam kotak
+    tagDisplay.textContent = tagText; 
     
-    // Kalau kotaknya diklik, buka lagi dropdownnya
-    tagDisplay.onclick = () => {
-      document.getElementById('tagMenu').classList.toggle('show');
-    };
+    // Cek apakah dia tuan rumah atau tamu
+    if (isOwner) {
+      tagDisplay.style.cursor = 'pointer';
+      tagDisplay.onclick = () => {
+        document.getElementById('tagMenu').classList.toggle('show');
+      };
+    } else {
+      tagDisplay.style.cursor = 'default';
+      tagDisplay.onclick = null;
+    }
   }
 }
