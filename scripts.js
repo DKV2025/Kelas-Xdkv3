@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       .eq('status', 'approved')
       .eq('is_featured', true)
       .order('approved_at', { ascending: false })
-      .limit(5); // <-- REM KE-1: Mentok 5 karya aja biar irit kuota
+      .limit(5); // <-- REM KE-1: Mentok 5 karya
 
     if (error) {
       console.error('Gagal mengambil featured posts:', error);
@@ -606,6 +606,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (!hasMorePosts) return;
+    let loadingSpinner = document.getElementById('scroll-spinner');
+    if (!loadingSpinner) {
+      loadingSpinner = document.createElement('div');
+      loadingSpinner.id = 'scroll-spinner';
+      loadingSpinner.innerHTML = '<div style="text-align:center; padding:20px; font-weight:bold; color:#666;">Sedang memuat karya... ⏳</div>';
+      karyaScroll.parentNode.insertBefore(loadingSpinner, scrollTrigger);
+    }
+    loadingSpinner.style.display = 'block'; // Munculin spinner
     isFetching = true;
 
     let query = supabaseClient
@@ -655,6 +663,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (to >= count - 1 || data.length < POSTS_PER_PAGE) {
       hasMorePosts = false;
+    }
+
+    if (loadingSpinner) {
+      loadingSpinner.style.display = 'none'; // Sembunyikan spinner
     }
 
     currentPage++;
