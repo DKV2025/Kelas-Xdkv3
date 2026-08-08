@@ -22,46 +22,46 @@
 
       <form class="auth-form" id="registerForm">
 
-    
-          <div class="auth-input-group">
+  <!-- KOLOM USERNAME -->
+  <div class="auth-input-group">
     <span class="auth-icon">👤</span>
-    <input
-  type="text"
-  id="registerUsername"
-  placeholder="Your Username"
-  required
->
+    <div class="floating-wrapper">
+      <input type="text" id="registerUsername" placeholder=" " required>
+      <label for="registerUsername">Username</label>
+    </div>
   </div>
 
-<div class="auth-field">
-  <label for="registerEmail">Email</label>
-  <input
-    type="email"
-    id="registerEmail"
-    placeholder="Masukkan email"
-    autocomplete="email"
-    required
-  >
-</div>
+  
+  <div class="auth-input-group">
+    <span class="auth-icon">✉️</span>
+    <div class="floating-wrapper">
+      <input type="email" id="registerEmail" placeholder=" " autocomplete="email" required>
+      <label for="registerEmail">Email</label>
+    </div>
+  </div>
+
+  <!-- KOLOM PASSWORD + MATA -->
+  <div class="auth-input-group">
+    <span class="auth-icon">🔒</span>
+    <div class="floating-wrapper">
+      <input type="password" id="registerPassword" placeholder=" " required>
+      <label for="registerPassword">Password</label>
+    </div>
+    <button type="button" class="toggle-password" onclick="togglePassword('registerPassword', this)">
+      ⌣
+    </button>
+  </div>
+
 
   <div class="auth-input-group">
     <span class="auth-icon">🔒</span>
-    <input
-  type="password"
-  id="registerPassword"
-  placeholder="Your password"
-  required
->
-  </div>
-
-  <div class="auth-input-group">
-    <span class="auth-icon">🔒</span>
-   <input
-  type="password"
-  id="registerConfirmPassword"
-  placeholder="Verify your password"
-  required
->
+    <div class="floating-wrapper">
+      <input type="password" id="registerConfirmPassword" placeholder=" " required>
+      <label for="registerConfirmPassword">Verify Your Password</label>
+    </div>
+    <button type="button" class="toggle-password" onclick="togglePassword('registerConfirmPassword', this)">
+      ⌣
+    </button>
   </div>
 
   <button type="submit" class="auth-btn">
