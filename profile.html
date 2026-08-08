@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-  <link rel="icon" type="image/png" href="images/favicon.webp">
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +30,22 @@
         <a href="edit-profile.html" id="editProfileBtn" class="profile-action-btn">
   Edit Profile
 </a>
+
+
+<div class="tag-selector-wrapper" id="tagSelectorUI" style="display: none;">
+  <button class="btn-add-tag" onclick="toggleTagMenu()">
+    + tags
+  </button>
+  
+  <span id="currentTagDisplay" style="display: none;"></span>
+
+  <!-- Dropdown Menu -->
+  <div class="tag-dropdown" id="tagMenu">
+    <button class="tag-option" onclick="updateClassTag('DKV 1')">DKV 1 <span>+</span></button>
+    <button class="tag-option" onclick="updateClassTag('DKV 2')">DKV 2 <span>+</span></button>
+    <button class="tag-option" onclick="updateClassTag('DKV 3')">DKV 3 <span>+</span></button>
+  </div>
+</div>
       </div>
 
        <a href="#" id="profileChatBtn" class="profile-chat-btn">
