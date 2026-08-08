@@ -255,8 +255,74 @@ body {
   font-size: 1.05rem;
 }
 
+/* =========================
+   FLOATING LABEL & EYE ICON
+========================= */
+.floating-wrapper {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
 
 
+.auth-input-group input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #111;
+  background: transparent;
+  padding-top: 18px;
+}
+
+
+.floating-wrapper label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #aaa;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+
+.floating-wrapper input:focus + label,
+.floating-wrapper input:not(:placeholder-shown) + label {
+  top: 14px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 16px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+}
+
+.toggle-password:active {
+  transform: scale(0.85);
+}
+
+
+input::-ms-reveal,
+input::-ms-clear,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
 
 
 
