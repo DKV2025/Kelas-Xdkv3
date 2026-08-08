@@ -543,6 +543,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const username = escapeHTML(post.profiles?.username || 'User');
     const avatar = escapeHTML(post.profiles?.avatar_url || 'images/pp-01.png');
+    
+    // Nambahin tangkepan data class_tag dari Supabase
+    const classTag = post.profiles?.class_tag ? escapeHTML(post.profiles.class_tag) : '';
+
     const category = escapeHTML(post.category);
     const postType = escapeHTML(post.post_type);
     const description = escapeHTML(post.description || '');
@@ -568,7 +572,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         </a>
         <div class="creator-info">
           <a href="profile.html?userId=${post.user_id}" class="creator-name-link">
-            <h4>${username}</h4>
+            <!-- INI BAGIAN YANG DITAMBAHIN BADGE KELASNYA -->
+            <h4>${username} ${classTag ? `<span class="class-badge">${classTag}</span>` : ''}</h4>
           </a>
           <span class="post-type-label">${postType}</span>
           <p>${description}</p>
@@ -618,7 +623,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let query = supabaseClient
       .from('posts')
-      .select('*, profiles (username, avatar_url)', { count: 'exact' })
+      .select('*, profiles (username, avatar_url, class_tag)', { count: 'exact' })
       .eq('status', 'approved');
 
     if (currentCategory !== 'Semua') {
@@ -685,7 +690,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       const { data: sharedPost, error } = await supabaseClient
         .from('posts')
-        .select('*, profiles (username, avatar_url)')
+        .select('*, profiles (username, avatar_url, class_tag)')
         .eq('id', targetPostId)
         .single();
 
