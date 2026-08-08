@@ -489,3 +489,104 @@ body {
     height: 180px;
   }
 }
+
+
+/* =========================
+   STYLE TAG KELAS
+========================= */
+/* Kotak badge DKV 1/2/3 */
+.class-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px;
+  margin-left: 8px; /* Jarak dari nama user */
+
+  border-radius: 6px;
+  background: #f4f3ff;
+  border: 1px solid #d8d4ff;
+  
+  color: #2f2a63;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =========================
+   UI DROPDOWN PROFILE
+========================= */
+.tag-selector-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+
+.btn-add-tag {
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: #f2f1fe;
+  border: 1px solid #cac6eb;
+  color: #171819;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-add-tag:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+
+.tag-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: #fff;
+  border: 1px solid rgba(2, 7, 56, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  
+  margin-top: 8px;
+  padding: 6px;
+  min-width: 120px;
+  
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+}
+
+
+.tag-dropdown.show {
+  display: flex;
+}
+
+.tag-option {
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag-option:hover {
+  background: #f4f3ff;
+  color: #2f2a63;
+}
