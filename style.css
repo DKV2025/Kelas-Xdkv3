@@ -2593,3 +2593,26 @@ body {
     padding-right: 38px;
   }
 }
+
+/* =========================
+   STYLE TAG KELAS (BUAT DI SHOWCASE BERANDA)
+========================= */
+.class-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px; 
+  margin-left: 8px; 
+
+  border-radius: 6px;
+  background: #f2f1fe; 
+  border: 1px solid #cac6eb; 
+  
+  color: #111;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: middle;
+}
