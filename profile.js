@@ -132,6 +132,8 @@ if (profileChatBtn) {
   if (!isOwnProfile) {
     if (editProfileBtn) editProfileBtn.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = 'none';
+    const uploadShortcut = document.querySelector('.profile-upload-shortcut');
+    if (uploadShortcut) uploadShortcut.style.display = 'none';
   }
 
   if (logoutBtn) {
@@ -143,6 +145,7 @@ if (profileChatBtn) {
       window.location.href = 'index.html';
     });
   }
+
 
   function renderProfileData() {
     if (profileAvatar) {
@@ -171,6 +174,28 @@ if (profileChatBtn) {
         profileInstagram.textContent = 'Belum ada Instagram.';
         profileInstagram.href = '#';
       }
+    }
+
+    const tagUI = document.getElementById('tagSelectorUI');
+    const btnAdd = document.querySelector('.btn-add-tag');
+
+    if (tagUI) {
+  
+      if (isOwnProfile || profileUser.class_tag) {
+        tagUI.style.display = 'flex';
+      } else {
+        tagUI.style.display = 'none';
+      }
+    }
+
+    // Sembunyiin tombol "+ tags" buat tamu
+    if (!isOwnProfile && btnAdd) {
+      btnAdd.style.display = 'none';
+    }
+
+    // Tampilkan isi tag kalau user punya data tag
+    if (profileUser.class_tag) {
+      renderActiveTag(profileUser.class_tag, isOwnProfile);
     }
   }
 
@@ -294,11 +319,6 @@ const imagePath = escapeHTML(post.image_path || '');
       return;
     }
 
-    if (imagePath) {
-      await supabaseClient.storage
-        .from('artworks')
-        .remove([imagePath]);
-    }
 
     alert('Postingan berhasil dihapus.');
     await renderMyWorks();
@@ -449,24 +469,34 @@ if (avatarFile.size > maxAvatarSize) {
   const fileExt = avatarFile.name.split('.').pop();
   const filePath = `${authUser.id}/avatar-${Date.now()}.${fileExt}`;
 
-  const { error: uploadError } = await supabaseClient.storage
-    .from('avatars')
-    .upload(filePath, avatarFile, {
-      contentType: avatarFile.type,
-      upsert: true
-    });
+  // <--- CLOUDINARY --->
+  const formData = new FormData();
+  formData.append('file', avatarFile);
+  formData.append('upload_preset', 'dkv_unsigned');
+  formData.append('folder', 'avatars');
 
-  if (uploadError) {
-    console.error(uploadError);
-    alert('Gagal upload avatar.');
+  try {
+    const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/lzdgghdf/image/upload', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const cloudinaryData = await cloudinaryRes.json();
+    
+    if (!cloudinaryRes.ok) {
+      throw new Error(cloudinaryData.error?.message || 'Gagal upload');
+    }
+
+    //f_auto,q_auto biar gambar langsung ke-compress otomatis!
+    const urlParts = cloudinaryData.secure_url.split('/upload/');
+    avatarUrl = urlParts[0] + '/upload/f_auto,q_auto/' + urlParts[1];
+
+  } catch (err) {
+    console.error(err);
+    alert('Gagal upload avatar ke Cloudinary.');
     return;
   }
-
-  const { data: publicUrlData } = supabaseClient.storage
-    .from('avatars')
-    .getPublicUrl(filePath);
-
-  avatarUrl = publicUrlData.publicUrl;
+  // --- SELESAI UPLOAD KE CLOUDINARY ---
 }
 
       const { data: updatedProfile, error: updateError } = await supabaseClient
@@ -495,3 +525,55 @@ if (avatarFile.size > maxAvatarSize) {
     });
   }
 });
+
+function toggleTagMenu() {
+  const menu = document.getElementById('tagMenu');
+  if (menu) menu.classList.toggle('show');
+}
+
+
+async function updateClassTag(selectedTag) {
+  try {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabaseClient
+      .from('profiles')
+      .update({ class_tag: selectedTag })
+      .eq('id', user.id);
+
+    if (error) throw error;
+
+   
+    renderActiveTag(selectedTag, true); 
+    document.getElementById('tagMenu').classList.remove('show');
+    
+  } catch (error) {
+    console.error('Error update tag:', error);
+    alert('Gagal memperbarui tag kelas.');
+  }
+}
+
+
+function renderActiveTag(tagText, isOwner) {
+  const btnAdd = document.querySelector('.btn-add-tag');
+  const tagDisplay = document.getElementById('currentTagDisplay');
+
+  if (tagText && btnAdd && tagDisplay) {
+    btnAdd.style.display = 'none';
+    tagDisplay.style.display = 'inline-flex';
+    tagDisplay.className = 'class-badge'; 
+    tagDisplay.textContent = tagText; 
+    
+    // Cek apakah dia tuan rumah atau tamu
+    if (isOwner) {
+      tagDisplay.style.cursor = 'pointer';
+      tagDisplay.onclick = () => {
+        document.getElementById('tagMenu').classList.toggle('show');
+      };
+    } else {
+      tagDisplay.style.cursor = 'default';
+      tagDisplay.onclick = null;
+    }
+  }
+}

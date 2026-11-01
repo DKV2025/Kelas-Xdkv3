@@ -205,7 +205,7 @@ if (postPreviewImage) {
   }
 
 
-  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+  const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
 async function getSupabaseUser() {
   const { data, error } = await supabaseClient.auth.getUser();
@@ -273,7 +273,7 @@ function makeSafeFileName(fileName) {
     const supabaseUser = await getSupabaseUser();
 
     if (!supabaseUser) {
-      alert('Kamu harus login dulu sebelum upload karya.');
+      alert('Kamu harus login sebelum upload karya.');
       window.location.href = 'login.html';
       return;
     }
@@ -326,7 +326,7 @@ function makeSafeFileName(fileName) {
 
     if (selectedFile.size > MAX_FILE_SIZE) {
       const wantCompress = confirm(
-        'Gambar terlalu besar. Ukuran maksimal 2MB. Kompres otomatis agar bisa diupload?'
+        'Gambar terlalu besar. Ukuran maksimal 1MB. Kompres otomatis agar bisa diupload?'
       );
 
       if (!wantCompress) {
@@ -337,7 +337,7 @@ function makeSafeFileName(fileName) {
         const compressedBlob = await compressImageToJpeg(selectedFile);
 
         if (compressedBlob.size > MAX_FILE_SIZE) {
-          alert('Gambar masih lebih dari 2MB setelah dikompres. Coba pakai gambar yang lebih kecil, atau convert menjadi .webp');
+          alert('Gambar masih lebih dari 1MB setelah dikompres. Coba pakai gambar yang lebih kecil, atau convert menjadi .webp');
           return;
         }
 
@@ -354,59 +354,65 @@ function makeSafeFileName(fileName) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Mengirim...';
 
-    const filePath = `${supabaseUser.id}/${Date.now()}-${fileName}`;
+   submitBtn.disabled = true;
+    submitBtn.textContent = 'Mengirim...';
 
-    const { error: uploadError } = await supabaseClient.storage
-      .from('artworks')
-      .upload(filePath, fileToUpload, {
-        contentType: fileExt === 'jpg' || fileExt === 'jpeg'
-          ? 'image/jpeg'
-          : selectedFile.type,
-        upsert: false
+    // --- MULAI UPLOAD KE CLOUDINARY ---
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+    formData.append('upload_preset', 'dkv_artworks');
+    formData.append('folder', 'artworks');
+
+    let imageUrl = '';
+    
+    try {
+      const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/lzdgghdf/image/upload', {
+        method: 'POST',
+        body: formData
       });
+      
+      const cloudinaryData = await cloudinaryRes.json();
+      
+      if (!cloudinaryRes.ok) {
+        throw new Error(cloudinaryData.error?.message || 'Gagal upload');
+      }
 
-    if (uploadError) {
-      console.error(uploadError);
-      alert('Gagal upload gambar ke storage.');
+      // f_auto,q_auto biar kompresi otomatis jalan
+      const urlParts = cloudinaryData.secure_url.split('/upload/');
+      imageUrl = urlParts[0] + '/upload/f_auto,q_auto/' + urlParts[1];
+
+    } catch (err) {
+      console.error(err);
+      alert('Gagal upload gambar ke XI DKV.');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Review';
       return;
     }
+    // --- SELESAI UPLOAD KE CLOUDINARY ---
 
-    const { data: publicUrlData } = supabaseClient.storage
-      .from('artworks')
-      .getPublicUrl(filePath);
-
-    const imageUrl = publicUrlData.publicUrl;
-
+    
     const { data: insertedPost, error: insertError } = await supabaseClient
-  .from('posts')
-  .insert({
-    user_id: supabaseUser.id,
-    image_url: imageUrl,
-    image_path: filePath,
-    category: selectedCategory,
-    post_type: selectedPostType,
-    aspect_mode: selectedAspect || 'square',
-    description: description,
-    status: 'pending',
-    is_featured: false
-  })
-  .select('id')
-  .single();
+      .from('posts')
+      .insert({
+        user_id: supabaseUser.id,
+        image_url: imageUrl,
+        category: selectedCategory,
+        post_type: selectedPostType,
+        aspect_mode: selectedAspect || 'square',
+        description: description,
+        status: 'pending',
+        is_featured: false
+      })
+      .select('id')
+      .single();
 
     if (insertError) {
-  console.error(insertError);
-
-  await supabaseClient.storage
-    .from('artworks')
-    .remove([filePath]);
-
-  alert('Gagal mengirim data postingan.');
-  submitBtn.disabled = false;
-  submitBtn.textContent = 'Submit Review';
-  return;
-}
+      console.error(insertError);
+      alert('Gagal mengirim data postingan.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Review';
+      return;
+    }
 
 await logActivity('submit_post', 'post', insertedPost.id, {
   page: 'upload.html',

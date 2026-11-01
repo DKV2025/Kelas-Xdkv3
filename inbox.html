@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-  <title>Inbox - XI DKV 3</title>
+  <title>Inbox &mdash; XI DKV 3</title>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="inbox.css">
@@ -12,52 +16,78 @@
 
 <body>
 
-  <header class="inbox-header">
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <p class="brand">XI DKV 2025 &middot; SMKN 1 Tsm</p>
 
-    <div class="inbox-brand">
-      XI DKV 3 - SMKN 1 Tsm
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="index.html#hero">Home</a>
+        <a href="index.html#tentang">Tentang</a>
+        <a href="index.html#karya">Karya</a>
+        <a href="index.html#struktur">Struktur</a>
+        <a href="index.html#galeri">Galeri</a>
+      </nav>
+      <div class="nav-auth" id="navAuth"></div>
     </div>
-
-    <nav class="inbox-nav">
-      <a href="index.html#home">Home</a>
-      <a href="index.html#karya">Karya</a>
-      <a href="index.html#tentang">Tentang</a>
-      <a href="index.html#cara">Cara</a>
-      <a href="index.html#struktur">Struktur</a>
-    </nav>
-
-    <a href="profile.html" class="inbox-user-chip" id="inboxUserChip">
-      <img src="images/pp-01.png" alt="Profile" id="inboxUserAvatar">
-      <span id="inboxUsername">Username</span>
-    </a>
-
   </header>
 
   <main class="inbox-page">
 
-    <div class="inbox-top">
-  <a href="index.html" class="inbox-back">
-    ← Kembali
-  </a>
-</div>
+    <header class="inbox-page-header">
+      <a href="index.html" class="inbox-back-btn" aria-label="Kembali ke beranda">
+        <span aria-hidden="true">&larr;</span>
+        <span>Kembali</span>
+      </a>
+      <div class="inbox-page-heading">
+        <h1 class="inbox-main-title">Pusat Pesan &amp; Notifikasi</h1>
+        <p class="inbox-main-sub">Kelola percakapan teman seangkatan dan pantau apresiasi karya terbarumu.</p>
+      </div>
+    </header>
 
-<div class="inbox-columns">
-  <section class="inbox-section">
-    <h2 class="inbox-section-title">Aktivitas terbaru</h2>
-
-    <div class="activity-list" id="activityList">
-      <p class="inbox-loading">Memuat aktivitas...</p>
+    <!-- Segmented Tab Bar -->
+    <div class="inbox-tabs-container">
+      <div class="inbox-segmented-tabs" role="tablist" aria-label="Tab Kotak Masuk">
+        <button type="button" class="inbox-tab-btn desktop-only" data-tab="all" role="tab" aria-selected="true">
+          <span>Semua Tampilan</span>
+        </button>
+        <button type="button" class="inbox-tab-btn" data-tab="chat" role="tab" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>Obrolan</span>
+          <span class="tab-badge" id="chatUnreadBadge" style="display: none;">0</span>
+        </button>
+        <button type="button" class="inbox-tab-btn" data-tab="activity" role="tab" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span>Aktivitas</span>
+          <span class="tab-badge" id="activityBadge" style="display: none;">0</span>
+        </button>
+      </div>
     </div>
-  </section>
 
-  <section class="inbox-section">
-    <h2 class="inbox-section-title">Riwayat chat</h2>
+    <div class="inbox-columns view-all" id="inboxColumns">
+      <!-- Section Riwayat Chat -->
+      <section class="inbox-section inbox-chat-col">
+        <div class="inbox-section-header">
+          <h2 class="inbox-section-title">Riwayat Chat</h2>
+          <span class="inbox-section-hint">Percakapan masuk</span>
+        </div>
 
-    <div class="inbox-list" id="inboxList">
-      <p class="inbox-loading">Memuat riwayat chat...</p>
+        <div class="inbox-list" id="inboxList">
+          <p class="inbox-loading">Memuat riwayat chat...</p>
+        </div>
+      </section>
+
+      <!-- Section Aktivitas Terbaru -->
+      <section class="inbox-section inbox-activity-col">
+        <div class="inbox-section-header">
+          <h2 class="inbox-section-title">Aktivitas Terbaru</h2>
+          <span class="inbox-section-hint">Apresiasi karya</span>
+        </div>
+
+        <div class="activity-list" id="activityList">
+          <p class="inbox-loading">Memuat aktivitas...</p>
+        </div>
+      </section>
     </div>
-  </section>
-</div>
 
   </main>
 

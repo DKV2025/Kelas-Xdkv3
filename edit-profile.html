@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Edit Profile - XI DKV 3</title>
-
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <title>Edit Profile – XI DKV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="profile.css">
 </head>
 
@@ -13,77 +15,97 @@
 
   <main class="edit-page">
 
-    <a href="profile.html" class="back-link">
-      ←
-    </a>
+    <div class="edit-container">
 
-    <section class="edit-card">
+      <header class="profile-topbar">
+        <a href="profile.html" class="back-link">
+          <span aria-hidden="true">←</span>
+          <span>Kembali ke Profile</span>
+        </a>
+      </header>
 
-      <div class="edit-top">
+      <section class="edit-card">
 
-        <label for="editAvatar" class="edit-avatar-wrap">
-          <img
-            src="images/pp-01.png"
-            alt="Profile avatar"
-            class="edit-avatar"
-            id="editAvatarPreview"
-          >
+        <div class="edit-top">
 
-          <input
-            type="file"
-            id="editAvatar"
-            accept="image/*"
-            hidden
-          >
-        </label>
+          <label for="editAvatar" class="edit-avatar-wrap" title="Klik untuk mengganti foto profil">
+            <img
+              src="images/pp-01.png"
+              alt="Profile avatar"
+              class="edit-avatar"
+              id="editAvatarPreview"
+            >
+            <span class="edit-avatar-badge">📷 Ubah Foto</span>
 
-        <div class="edit-user-preview">
-          <h1 id="editPreviewUsername">Username</h1>
-          <p id="editPreviewBio">bio</p>
-          <p id="editPreviewInstagram">IG : @</p>
+            <input
+              type="file"
+              id="editAvatar"
+              accept="image/*"
+              hidden
+            >
+          </label>
+
+          <div class="edit-user-preview">
+            <span class="edit-preview-label">Pratinjau Profil</span>
+            <h1 id="editPreviewUsername">Username</h1>
+            <p id="editPreviewBio">bio</p>
+            <p id="editPreviewInstagram" class="edit-preview-ig">IG : @</p>
+          </div>
+
         </div>
 
-      </div>
+        <form class="edit-form" id="editProfileForm">
 
+          <p class="edit-title">Informasi Profil</p>
 
-      <form class="edit-form" id="editProfileForm">
+          <div class="edit-field">
+            <label for="editUsername" class="edit-field-label">Username</label>
+            <div class="edit-input-group">
+              <span class="edit-icon" aria-hidden="true">@</span>
+              <input
+                type="text"
+                id="editUsername"
+                placeholder="Masukkan username"
+              >
+            </div>
+          </div>
 
-        <p class="edit-title">Edit your profile</p>
+          <div class="edit-field">
+            <label for="editBio" class="edit-field-label">Bio Singkat</label>
+            <div class="edit-input-group">
+              <span class="edit-icon" aria-hidden="true">✎</span>
+              <input
+                type="text"
+                id="editBio"
+                placeholder="Ceritakan sedikit tentang dirimu atau bidang karyamu"
+              >
+            </div>
+          </div>
 
-        <div class="edit-input-group">
-          <span class="edit-icon">✎</span>
-          <input
-            type="text"
-            id="editUsername"
-            placeholder="Username"
-          >
-        </div>
+          <div class="edit-field">
+            <label for="editInstagram" class="edit-field-label">Username Instagram</label>
+            <div class="edit-input-group">
+              <span class="edit-icon" aria-hidden="true">IG</span>
+              <input
+                type="text"
+                id="editInstagram"
+                placeholder="@username_ig"
+              >
+            </div>
+          </div>
 
-        <div class="edit-input-group">
-          <span class="edit-icon">✎</span>
-          <input
-            type="text"
-            id="editBio"
-            placeholder="Bio"
-          >
-        </div>
+          <div class="edit-actions">
+            <a href="profile.html" class="cancel-profile-btn">Batal</a>
+            <button type="submit" class="save-profile-btn">
+              Simpan Perubahan
+            </button>
+          </div>
 
-        <div class="edit-input-group">
-          <span class="edit-icon">✎</span>
-          <input
-            type="text"
-            id="editInstagram"
-            placeholder="@instagram"
-          >
-        </div>
+        </form>
 
-        <button type="submit" class="save-profile-btn">
-          Ubah
-        </button>
+      </section>
 
-      </form>
-
-    </section>
+    </div>
 
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

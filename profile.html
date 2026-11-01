@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-  <link rel="icon" type="image/webp" href="images/favicon.webp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Profile - XI DKV 3</title>
-
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
+  <title>Profile – XI DKV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="profile.css">
 </head>
 
@@ -14,64 +15,94 @@
 
   <main class="profile-page">
 
-    <a href="index.html" class="profile-back-btn">
-  ← Kembali
-</a>
-    <section class="profile-hero">
+    <div class="profile-container">
 
-      <div class="profile-left">
-        <img
-          src="images/pp-01.png"
-          alt="Profile avatar"
-          class="profile-avatar"
-          id="profileAvatar"
-        >
+      <header class="profile-topbar">
+        <a href="index.html" class="profile-back-btn" aria-label="Kembali ke beranda">
+          <span aria-hidden="true">←</span>
+          <span>Kembali ke Beranda</span>
+        </a>
+      </header>
 
-        <a href="edit-profile.html" id="editProfileBtn" class="profile-action-btn">
-  Edit Profile
-</a>
-      </div>
+      <section class="profile-hero">
 
-       <a href="#" id="profileChatBtn" class="profile-chat-btn">
-    Chat
-  </a>
-    
-      <div class="profile-info">
-        <h1 id="profileUsername">Username</h1>
+        <div class="profile-left">
+          <div class="profile-avatar-frame">
+            <img
+              src="images/pp-01.png"
+              alt="Profile avatar"
+              class="profile-avatar"
+              id="profileAvatar"
+            >
+          </div>
 
-        <p id="profileBio">
-          Bio
-        </p>
+          <div class="tag-selector-wrapper" id="tagSelectorUI" style="display: none;">
+            <button type="button" class="btn-add-tag" onclick="toggleTagMenu()">
+              + Pilih Tag Kelas
+            </button>
 
-        <a
-       href="#"
-       id="profileInstagram"
-       class="profile-instagram"
-       target="_blank"
-       rel="noopener noreferrer"
->
-  Belum ada Instagram.
-</a>
-      </div>
+            <span id="currentTagDisplay" style="display: none;"></span>
+
+            <!-- Dropdown Menu -->
+            <div class="tag-dropdown" id="tagMenu">
+              <button type="button" class="tag-option" onclick="updateClassTag('DKV 1')">DKV 1 <span>+</span></button>
+              <button type="button" class="tag-option" onclick="updateClassTag('DKV 2')">DKV 2 <span>+</span></button>
+              <button type="button" class="tag-option" onclick="updateClassTag('DKV 3')">DKV 3 <span>+</span></button>
+              <button type="button" class="tag-option" onclick="updateClassTag('Viewer')">Viewer <span>+</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-main-info">
+          <div class="profile-info">
+            <h1 id="profileUsername">Username</h1>
+
+            <p id="profileBio">
+              Bio
+            </p>
+
+            <a
+              href="#"
+              id="profileInstagram"
+              class="profile-instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Belum ada Instagram.
+            </a>
+          </div>
+
+          <div class="profile-actions">
+            <a href="edit-profile.html" id="editProfileBtn" class="profile-action-btn">
+              Edit Profile
+            </a>
+
+            <a href="#" id="profileChatBtn" class="profile-chat-btn">
+              💬 Kirim Pesan
+            </a>
+
+            <button type="button" class="logout-btn" id="logoutBtn">
+              Logout
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="my-work-section">
+
+        <div class="my-work-header">
+          <h2 id="worksTitle">My Works</h2>
+          <a href="upload.html" class="profile-upload-shortcut">+ Upload Karya</a>
+        </div>
+
+        <div class="my-work-list" id="myWorkList">
+          <!-- karya user akan muncul lewat JS -->
+        </div>
+
+      </section>
+
     </div>
-  <button class="logout-btn" id="logoutBtn">
-  Logout
-</button>
-</div>
-    </section>
-
-  
-
-
-    <section class="my-work-section">
-
-      <h2 id="worksTitle">My Works</h2>
-
-      <div class="my-work-list" id="myWorkList">
-        <!-- karya user akan muncul lewat JS -->
-      </div>
-
-    </section>
 
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

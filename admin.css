@@ -25,11 +25,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 57px;
-  background: #aaacce;;
-  border-radius: 18px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
   position: relative;
+  text-decoration: none;
+  color: rgb(42, 41, 51);
 }
 
 .back:hover {

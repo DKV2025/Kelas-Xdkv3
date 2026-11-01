@@ -4,32 +4,32 @@
   <meta name="description" content="Profil dan dokumentasi kelas XI DKV 3 SMKN 1 Tasikmalaya. Berisi karya digital siswa, struktur kelas, dan galeri." />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XI DKV 3 – SMKN 1 Tasikmalaya</title>
-    <meta property="og:image" content="https://DKV2025.github.io/Kelas-Xdkv3/images/meta-thumbnail.png">
-    <meta property="og:image:width" content="600">
-    <meta property="og:image:height" content="600">
-<meta name="google-site-verification" content="KkxpoHQ2nluWdUztHDBn_YaVvuRhFjkqKSikfa9u1ag" />
-<link rel="icon" type="image/webp" href="images/favicon.webp">
+  <title>XI DKV 3 &mdash; SMKN 1 Tasikmalaya</title>
+  <meta property="og:image" content="https://DKV2025.github.io/Kelas-Xdkv3/images/meta-thumbnail.png">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta name="google-site-verification" content="KkxpoHQ2nluWdUztHDBn_YaVvuRhFjkqKSikfa9u1ag" />
+  <link rel="icon" type="image/webp" href="images/favicon.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
+<body>
 
-  <!-- ═══════════════════════════════════════
+  <!-- 
        1. HEADER (sticky)
-  ═══════════════════════════════════════ -->
+   -->
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <p class="brand">XI DKV 3 · SMKN 1 Tsm</p>
+      <p class="brand">XI DKV 2025 &middot; SMKN 1 Tsm</p>
 
       <nav class="nav" aria-label="Navigasi utama">
         <a href="#hero">Home</a>
         <a href="#tentang">Tentang</a>
-        <a href="#cara">Cara</a>
-        <a href="#struktur">Struktur</a>
         <a href="#karya">Karya</a>
+        <a href="#struktur">Struktur</a>
+        <a href="#galeri">Galeri</a>
       </nav>
         <div class="nav-auth" id="navAuth"></div>
     </div>
@@ -37,36 +37,32 @@
 
   <main>
 
-    <!-- ═══════════════════════════════════════
-         2. HERO — Slideshow karya + logo bawah
-    ═══════════════════════════════════════ -->
+    <!-- 
+         2. HERO Slideshow karya
+    -->
     <section class="hero" id="hero" aria-label="Hero slideshow karya">
 
-      <!-- Slideshow area -->
+   
       <div class="slideshow" aria-live="polite">
         <div class="slides-track" id="slidesTrack">
-          <div class="slide"><img src="images/karya-01.jpg" alt="Karya 1" /></div>
-          <div class="slide"><img src="images/karya-02.jpg" alt="Karya 2" /></div>
-          <div class="slide"><img src="images/karya-03.jpg" alt="Karya 3" /></div>
-          <div class="slide"><img src="images/karya-04.jpg" alt="Karya 4" /></div>
-          <div class="slide"><img src="images/karya-05.jpg" alt="Karya 5" /></div>
-          <div class="slide"><img src="images/karya-06.jpg" alt="Karya 6" /></div>
-          <div class="slide"><img src="images/karya-07.jpg" alt="Karya 6" /></div>
+          <div class="slide"><img src="images/karya-06.jpg" alt="Karya 1" loading="lazy"/></div>
+          <div class="slide"><img src="images/karya-02.jpg" alt="Karya 2" loading="lazy"/></div>
+          <div class="slide"><img src="images/karya-04.jpg" alt="Karya 3" loading="lazy"/></div>
+          <div class="slide"><img src="images/karya-01.jpg" alt="Karya 4" loading="lazy"/></div>
+        
 
-
-          <!-- duplikat untuk infinite loop -->
-          <div class="slide" aria-hidden="true"><img src="images/karya-01.jpg" alt="" /></div>
+       
+          <div class="slide" aria-hidden="true"><img src="images/karya-06.jpg" alt="" /></div>
           <div class="slide" aria-hidden="true"><img src="images/karya-02.jpg" alt="" /></div>
         </div>
 
-        <!-- Tombol skip -->
+     
         <div class="slide-controls">
           <button class="slide-btn" id="slidePrev" aria-label="Sebelumnya">&#8592;</button>
           <button class="slide-btn" id="slideNext" aria-label="Berikutnya">&#8594;</button>
         </div>
       </div>
 
-      <!-- Logo + tagline di bawah slideshow -->
       <div class="hero-brand-bar">
         <div class="container hero-brand-inner">
           <img class="hero-logo" src="images/logo-kelas.webp" alt="Logo Kelas XI DKV 3" />
@@ -78,54 +74,68 @@
 
     </section>
 
+    <!-- ============================================
+         2. KARYA SISWA
+    ============================================ -->
+    <section class="karya-showcase" id="karya">
+      <div class="karya-header">
+        <h2>Karya siswa</h2>
+        <p class="karya-subtitle">Kumpulan karya orisinal siswa DKV</p>
+        <a href="upload.html" class="upload-entry-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Upload karya</span>
+        </a>
+      </div>
 
-    <!-- ═══════════════════════════════════════
-         3. TENTANG KELAS DKV
-    ═══════════════════════════════════════ -->
-    <section class="section" id="tentang" aria-labelledby="tentang-title">
-      <div class="container">
-        <h2 id="tentang-title" class="section-title">Tentang website</h2>
+      <!-- FILTER BAR -->
+      <div class="filter-bar" id="filterBar">
+  <button class="filter-toggle" id="filterToggle" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <line x1="2" y1="4" x2="14" y2="4"/><circle cx="6" cy="4" r="1.6" fill="currentColor" stroke="none"/>
+      <line x1="2" y1="8" x2="14" y2="8"/><circle cx="10" cy="8" r="1.6" fill="currentColor" stroke="none"/>
+      <line x1="2" y1="12" x2="14" y2="12"/><circle cx="4" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="label">Filter</span>
+  </button>
 
-      <p>Web ini adalah ruang portofolio digital siswa DKV yang dikembangkan sebagai project kreatif kelas.
-    Di sini, siswa DKV bisa menampilkan karya secara lebih luas, dan membangun sebuah identitas.
-  </p>
-</section>
-
-<!-- ============================================
-     KARYA SISWA
-============================================ -->
-<section class="karya-showcase" id="karya">
-  <div class="karya-header">
-    <h2>Karya siswa</h2>
+  <div class="categories" id="categories">
+    <span class="chip selected" data-cat="Semua">Semua</span>
+    <span class="chip" data-cat="Digital art">Digital Art</span>
+    <span class="chip" data-cat="Photography">Photography</span>
+    <span class="chip" data-cat="Editing">Editing</span>
+    <span class="chip" data-cat="Traditional art">Traditional Art</span>
+    <span class="chip" data-cat="Design/Poster">Design/Poster</span>
   </div>
-<a href="upload.html" class="upload-entry-btn">
-  Upload karya
-</a>
+</div>
+
+
   <div class="karya-scroll" id="approvedPostsContainer">
 
     <!-- CARD 1 -->
     <article class="karya-card">
 
       <span class="kategori">
-        Category
+        Digital Art
       </span>
 
-      <img src="images/post-01.webp" alt="Karya siswa">
+      <div class="karya-image aspect-original">
+        <img src="images/post-01.webp" alt="Karya siswa" loading="lazy">
+      </div>
 
       <div class="creator">
 
-        <a href="profile.html?userId=${post.userId}" alt="Profile" class="post-author">
-  <img src="${post.avatar || 'images/pp-01.png'}" alt="${post.username}">
+       <a href="#" alt="Profile" class="post-author">
+  <img src="images/pp-01.png" alt="Profile">
 </a>
 
         <div class="creator-info">
-          <h4>Username</h4>
+          <h4>Nama Siswa</h4>
           <p>
-            Description
+            Deskripsi karya siswa
           </p>
 
           <span class="tanggal">
-            00/0/00
+            00/00/0000
           </span>
         </div>
 
@@ -138,10 +148,12 @@
     <article class="karya-card">
 
       <span class="kategori">
-        Category
+        Photography
       </span>
 
-      <img src="images/post-02.webp" alt="Karya siswa">
+      <div class="karya-image aspect-original">
+        <img src="images/post-02.webp" alt="Karya siswa" loading="lazy">
+      </div>
 
       <div class="creator">
 
@@ -150,13 +162,13 @@
           alt="Profile">
 
         <div class="creator-info">
-          <h4>Username</h4>
+          <h4>Nama Siswa</h4>
           <p>
-            Description
+            Deskripsi karya siswa
           </p>
 
           <span class="tanggal">
-            00/0/00
+            00/00/0000
           </span>
         </div>
 
@@ -167,13 +179,27 @@
   </div>
 </section>
 
-<!-- 5. Cara Kami Berkarya -->
+    <!-- ============================================
+         3. TENTANG WEBSITE
+    ============================================ -->
+    <section class="section tentang-section" id="tentang" aria-labelledby="tentang-title">
+      <div class="container">
+        <h2 id="tentang-title" class="section-title">Tentang website</h2>
+        <p class="tentang-lead">
+          Web ini adalah ruang portofolio digital siswa DKV yang dikembangkan sebagai project kreatif jurusan. Di sini, siswa DKV bisa menampilkan karya secara lebih luas, dan membangun sebuah identitas.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         4. CARA KAMI BERKARYA
+    ============================================ -->
     <section class="section" id="cara" aria-labelledby="cara-title">
       <div class="container">
         <h2 id="cara-title" class="section-title">Cara kami berkarya</h2>
 
         <ul class="clean-points">
-          <li>Standar desain yang konsisten & terbaca.</li>
+          <li>Standar desain yang konsisten &amp; terbaca.</li>
           <li>Terbuka terhadap kritik.</li>
           <li>Menghargai peran dan ide satu sama lain.</li>
           <li>Profesional.</li>
@@ -181,92 +207,48 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════
-         5. STRUKTUR KELAS
-    ═══════════════════════════════════════ -->
+   
     <section class="section" id="struktur" aria-labelledby="struktur-title">
       <div class="container">
-        <h2 id="struktur-title" class="section-title">Struktur kelas XI DKV 3</h2>
+        <h2 id="struktur-title" class="section-title">Pengurus XI DKV</h2>
 
-        <!-- Guru -->
         <div class="struktur-top">
-          <article class="person">
-            <img src="images/anggota-01.webp" alt="Foto wali kelas" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wali kelas</p>
-              <h3 class="person-name">M.Iman Firmansyah S.kom</h3>
-              <p class="person-sub">Guru Produktif / Pembimbing</p>
-            </div>
-          </article>
+        <article class="person" tabindex="0">
+  <img src="images/anggota-03.webp" alt="Foto Elpan" loading="lazy" />
+  <div class="person-meta">
+    <p class="person-role">Ketua Angkatan</p>
+    <h3 class="person-name">Elpan Setia Nugraha</h3>
+    <p class="person-sub">XI DKV 3</p>
+  </div>
+  <div class="person-ig-overlay">
+    <a href="https://www.instagram.com/elpansetiaa_?igsh=MXN4d3V5NngydmR4bw==" target="_blank" class="ig-btn">
+      @elpansetiaa_
+    </a>
+  </div>
+</article>
 
-          <article class="person">
-            <img src="images/anggota-02.webp" alt="Foto wali murid" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wali murid</p>
-              <h3 class="person-name">Asep Irawan Takhyana, S.Pd</h3>
-              <p class="person-sub">Guru Bahasa Indonesia</p>
-            </div>
-          </article>
+
+<article class="person" tabindex="0">
+  <img src="images/anggota-02.webp" alt="Foto Ghatfan" loading="lazy" />
+  <div class="person-meta">
+    <p class="person-role">Wakil Ketua Angkatan</p>
+    <h3 class="person-name">Ghatfan Nugraha</h3>
+    <p class="person-sub">XI DKV 1</p>
+  </div>
+  <div class="person-ig-overlay">
+    <a href="https://www.instagram.com/ghan_syn?igsh=MTd1cGdudHo2eTIxcQ==" target="_blank" class="ig-btn">
+      @ghan_syn
+    </a>
+  </div>
+</article>
         </div>
-
-        <!-- Pengurus -->
-        <div class="grid-seksi">
-          <article class="person">
-            <img src="images/anggota-03.webp" alt="Foto ketua murid" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Ketua murid</p>
-              <h3 class="person-name">Elpan Setia Nugraha</h3>
-            </div>
-          </article>
-
-          <article class="person">
-            <img src="images/anggota-04.webp" alt="Foto wakil ketua murid" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wakil ketua murid</p>
-              <h3 class="person-name">Riska Rismayanti</h3>
-            </div>
-          </article>
-
-          <article class="person">
-            <img src="images/anggota-05.webp" alt="Foto sekretaris" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Sekretaris</p>
-              <h3 class="person-name">Dewi Murni</h3>
-            </div>
-          </article>
-
-          <article class="person">
-            <img src="images/anggota-06.webp" alt="Foto wakil sekretaris" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wakil sekretaris</p>
-              <h3 class="person-name">Luthfi Farizqi Maulana</h3>
-            </div>
-          </article>
-
-          <article class="person">
-            <img src="images/anggota-07.webp" alt="Foto bendahara" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Bendahara</p>
-              <h3 class="person-name">Hafizah Nur Hasanah</h3>
-            </div>
-          </article>
-
-          <article class="person">
-            <img src="images/anggota-08.webp" alt="Foto wakil bendahara" loading="lazy" />
-            <div class="person-meta">
-              <p class="person-role">Wakil bendahara</p>
-              <h3 class="person-name">Sophia Nabilah Nurullillah</h3>
-            </div>
-          </article>
-        </div>
-
       </div>
     </section>
 
 
-    <!-- ═══════════════════════════════════════
+    <!-- 
          6. GALERI
-    ═══════════════════════════════════════ -->
+     -->
     <section class="section" id="galeri" aria-labelledby="galeri-title">
       <div class="container">
         <h2 id="galeri-title" class="section-title">Galeri</h2>
@@ -291,55 +273,77 @@
   </main>
 
   <section class="admin-shortcut-wrap" id="adminShortcutWrap">
-  <a href="admin.html" class="admin-shortcut-btn" title="Admin Approval" aria-label="Admin Approval">
-    ✓
-  </a>
-</section>
+    <a href="admin.html" class="admin-shortcut-btn" title="Admin Approval" aria-label="Admin Approval">
+      &#10003;
+    </a>
+  </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- 
        7. FOOTER
-  ═══════════════════════════════════════ -->
+  -->
   <footer class="site-footer" id="footer">
     <div class="container footer-inner">
 
-      <div class="footer-social" aria-label="Sosial media">
-        <a class="ig-link" href="https://www.instagram.com/europhia.sketsaa/"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="Buka Instagram @europhia.sketsaa">
-          <img class="ig-icon" src="images/instagram.webp" alt="" aria-hidden="true" />
-          <span class="ig-handle">@europhia.sketsaa</span>
-        </a>
+      <div class="footer-social" aria-label="Sosial media angkatan">
+        <div class="ig-cards-grid">
+          <a class="ig-card" href="https://www.instagram.com/europhia.sketsaa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram XI DKV 3: @europhia.sketsaa">
+            <div class="ig-card-icon-wrap">
+              <img class="ig-card-icon" src="images/instagram.webp" alt="Instagram XI DKV 3" aria-hidden="true" />
+            </div>
+            <div class="ig-card-info">
+              <span class="ig-card-class">XI DKV 3</span>
+              <strong class="ig-card-handle">@europhia.sketsaa</strong>
+            </div>
+            <svg class="ig-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+
+          <a class="ig-card" href="https://www.instagram.com/xi.dkv2__sketsa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram XI DKV 2: @xi.dkv2_sketsa">
+            <div class="ig-card-icon-wrap">
+              <img class="ig-card-icon" src="images/instagram.webp" alt="Instagram XI DKV 2" aria-hidden="true" />
+            </div>
+            <div class="ig-card-info">
+              <span class="ig-card-class">XI DKV 2</span>
+              <strong class="ig-card-handle">@xi.dkv2_sketsa</strong>
+            </div>
+            <svg class="ig-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+
+          <a class="ig-card" href="https://www.instagram.com/dekapione.aud/" target="_blank" rel="noopener noreferrer" aria-label="Instagram XI DKV 1: @dekapione.aud">
+            <div class="ig-card-icon-wrap">
+              <img class="ig-card-icon" src="images/instagram.webp" alt="Instagram XI DKV 1" aria-hidden="true" />
+            </div>
+            <div class="ig-card-info">
+              <span class="ig-card-class">XI DKV 1</span>
+              <strong class="ig-card-handle">@dekapione.aud</strong>
+            </div>
+            <svg class="ig-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+        </div>
       </div>
+      
 
       <p class="footer-address">
         <span class="muted">JL.Mancogeh no26, Kec.Cipedes, Kota Tasikmalaya, Jawa Barat.</span>
       </p>
 
-      <div class="footer-join">
-  <h3>Join Us?</h3>
-  <p>
-    Creative project portofolio digital DKV. <p>
-    <p>Open for collaboration, portfolio showcase, and creative projects.
-    Untuk kelas DKV lain yang ingin ikut menampilkan.
-  </p>
-
-  <a href="https://www.instagram.com/Ahdanrizkiya" target="_blank" class="join-link">
-    Contact @Ahdanrizkiya
-  </a>
-</div>
+      <p class="footer-desc">
+        Creative project portofolio digital DKV. Open for collaboration, portfolio showcase, and creative projects.
+      </p>
 
       <div class="creator-credit">
-  <p class="credit-label">Created by</p>
+        <p class="credit-label">Created by</p>
 
-  <div class="credit-content">
-    <img src="images/pembuat.webp" alt="Creator profile" class="credit-avatar">
+        <div class="credit-content">
+          <img src="images/pembuat.webp" alt="Creator profile" class="credit-avatar">
 
-    <div class="credit-text">
-      <h4>Akhdan</h4>
-      <p>Creating somethings that feel alive.</p>
+          <div class="credit-text">
+            <h4 class="ling"><a href="https://www.instagram.com/Ahdanrizkiya" target="_blank" rel="noopener noreferrer">Akhdan</a></h4>
+            <p>Creating somethings that feel alive.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </footer>
 
   <div class="login-toast" id="loginToast">
     <div class="login-toast-content">
@@ -349,7 +353,131 @@
 
     <div class="login-toast-actions">
       <a href="login.html">Login</a>
-      <button type="button" id="closeLoginToast">×</button>
+      <button type="button" id="closeLoginToast">&times;</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       8. PREVIEW MODAL (LIGHTBOX DENGAN BLUR)
+  ============================================ -->
+  <div id="imagePreviewModal" class="image-preview-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Pratinjau Karya">
+    <div class="preview-modal-backdrop" id="previewModalBackdrop"></div>
+    <div class="preview-modal-dialog">
+      <div class="preview-modal-bar">
+        <span class="preview-modal-title" id="previewModalTitle">Pratinjau Karya</span>
+        <button type="button" class="preview-modal-close" id="previewModalClose" aria-label="Tutup pratinjau karya">
+          &times;
+        </button>
+      </div>
+      <div class="preview-modal-body">
+        <img id="previewModalImage" src="" alt="Pratinjau Karya DKV" class="preview-modal-img" />
+      </div>
+      <div class="preview-modal-footer" id="previewModalCaption" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       9. MODAL BAGIKAN KARYA (SHARE MODAL)
+  ============================================ -->
+  <div id="shareModal" class="share-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+    <div class="share-modal-backdrop" id="shareModalBackdrop"></div>
+    <div class="share-modal-dialog">
+      <div class="share-modal-handle" aria-hidden="true"></div>
+      
+      <div class="share-modal-header">
+        <h3 id="shareModalTitle" class="share-modal-title">Bagikan Karya</h3>
+        <button type="button" class="share-modal-close" id="shareModalClose" aria-label="Tutup menu bagikan">
+          &times;
+        </button>
+      </div>
+
+      <!-- Preview Kartu Karya yang sedang dibagikan -->
+      <div class="share-modal-preview">
+        <div class="share-preview-thumb-wrap">
+          <img id="shareModalThumb" src="" alt="Thumbnail karya" class="share-preview-thumb" />
+        </div>
+        <div class="share-preview-info">
+          <span id="shareModalCategory" class="share-preview-category">Digital Art</span>
+          <h4 id="shareModalAuthor" class="share-preview-author">Karya Siswa DKV</h4>
+          <p id="shareModalDesc" class="share-preview-desc">Deskripsi karya...</p>
+        </div>
+      </div>
+
+      <!-- Daftar Opsi Bagikan -->
+      <div class="share-modal-options">
+        <!-- Opsi 1: Instagram Story -->
+        <button type="button" class="share-opt-btn" id="shareOptIgStory">
+          <div class="share-opt-icon share-opt-ig">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+          <div class="share-opt-text">
+            <span class="share-opt-name">Instagram Story</span>
+            <span class="share-opt-desc">Buka Story &amp; otomatis salin link</span>
+          </div>
+          <span class="share-opt-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <!-- Opsi 2: WhatsApp -->
+        <button type="button" class="share-opt-btn" id="shareOptWhatsApp">
+          <div class="share-opt-icon share-opt-wa">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.06 6.84C8.88 6.84 8.58 6.91 8.33 7.18C8.08 7.46 7.38 8.11 7.38 9.46C7.38 10.81 8.36 12.11 8.5 12.3C8.64 12.48 10.42 15.22 13.15 16.4C15.42 17.37 15.88 17.18 16.37 17.13C16.86 17.08 17.95 16.48 18.18 15.83C18.41 15.19 18.41 14.63 18.34 14.52C18.27 14.41 18.09 14.34 17.81 14.2C17.53 14.07 16.18 13.4 15.93 13.31C15.68 13.22 15.5 13.17 15.31 13.45C15.13 13.73 14.6 14.34 14.44 14.52C14.28 14.71 14.12 14.73 13.84 14.59C13.56 14.45 12.67 14.16 11.62 13.22C10.79 12.48 10.24 11.58 10.1 11.35C9.96 11.12 10.09 11 10.23 10.86C10.35 10.74 10.5 10.54 10.64 10.38C10.78 10.22 10.82 10.1 10.92 9.92C11.01 9.73 10.96 9.57 10.89 9.43C10.82 9.29 10.27 7.95 10.04 7.4C9.82 6.86 9.59 6.94 9.43 6.93C9.27 6.93 9.09 6.84 9.06 6.84Z"/>
+            </svg>
+          </div>
+          <div class="share-opt-text">
+            <span class="share-opt-name">WhatsApp</span>
+            <span class="share-opt-desc">Kirim pesan langsung ke obrolan WA</span>
+          </div>
+          <span class="share-opt-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <!-- Opsi 3: Salin Tautan (Copy Link) -->
+        <button type="button" class="share-opt-btn" id="shareOptCopy">
+          <div class="share-opt-icon share-opt-copy">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </div>
+          <div class="share-opt-text">
+            <span class="share-opt-name">Salin Tautan</span>
+            <span class="share-opt-desc" id="shareOptCopyUrlText">dkv-share.vercel.app</span>
+          </div>
+          <span class="share-opt-badge" id="shareOptCopyBadge">Salin</span>
+        </button>
+
+        <!-- Opsi 4: Opsi Lainnya (Native Mobile Share Sheet) -->
+        <button type="button" class="share-opt-btn" id="shareOptNative">
+          <div class="share-opt-icon share-opt-more">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </div>
+          <div class="share-opt-text">
+            <span class="share-opt-name">Opsi Lainnya</span>
+            <span class="share-opt-desc">Buka menu berbagi bawaan perangkat</span>
+          </div>
+          <span class="share-opt-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+
+      <!-- Hint Box -->
+      <div class="share-modal-hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Tips: Tempel stiker <strong>Tautan</strong> di Instagram Story agar teman langsung dapat mengunjungi karya ini.</span>
+      </div>
     </div>
   </div>
 

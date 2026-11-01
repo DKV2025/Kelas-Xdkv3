@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - XI DKV 3</title>
+  <title>Login - XI DKV </title>
 
   <link rel="stylesheet" href="auth.css">
 </head>
@@ -17,30 +17,43 @@
 
       <h1>
         Selamat datang di<br>
-        website XIDKV3
+        website XI DKV 2025
       </h1>
 
       <form class="auth-form" id="loginForm">
 
+
+<form class="auth-form" id="loginForm">
+
+  <!-- KOLOM USERNAME -->
   <div class="auth-input-group">
     <span class="auth-icon">👤</span>
-    <input type="text" id="loginUsername" placeholder="Your Username">
+    <div class="floating-wrapper">
+      <input type="text" id="loginUsername" placeholder=" " required>
+      <label for="loginUsername">Username</label>
+    </div>
   </div>
 
-  <div class="auth-field">
-  <label for="loginEmail">Email</label>
-  <input
-    type="email"
-    id="loginEmail"
-    placeholder="Masukkan email"
-    autocomplete="email"
-    required
-  >
-</div>
+ 
+  <div class="auth-input-group">
+    <span class="auth-icon">✉️</span>
+    <div class="floating-wrapper">
+      <input type="email" id="loginEmail" placeholder=" " autocomplete="email" required>
+      <label for="loginEmail">Email</label>
+    </div>
+  </div>
 
+ 
   <div class="auth-input-group">
     <span class="auth-icon">🔒</span>
-    <input type="password" id="loginPassword" placeholder="Your Password">
+    <div class="floating-wrapper">
+      <input type="password" id="loginPassword" placeholder=" " required>
+      <label for="loginPassword">Password</label>
+    </div>
+    
+    <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">
+      ⌣
+    </button>
   </div>
 
   <button type="submit" class="auth-btn">
@@ -49,10 +62,16 @@
 
 </form>
 
+</form>
+
       <p class="auth-switch">
         Belum punya akun?<br>
-        <a href="register.html">register sekarang</a>
+        <a class="auth-switch2" href="register.html">register sekarang</a>
       </p>
+      <p class="auth-switch2">
+        <a class="auth-switch2" href="forgot.html">Lupa password?</a>
+      </p>
+    
 
     </section>
 
